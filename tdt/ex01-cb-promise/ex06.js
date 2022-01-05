@@ -1,15 +1,16 @@
 
-const iPromise = new Promise((resolve, reject) => {
+const iPromise = async (...args) => {
   const number = Math.random()
-  if (number > .5) return resolve(number)
-  else reject('The value is too small')
-})
+  if (number > .5) return number
+  else throw new Error('The value is too small')
+}
 
 
 exports.run = () => {
   console.log(' promise - 01')
-  iPromise
+  iPromise()
   .then((number) => console.log(`The number is ${number}`))
   .catch((error) => console.error(`An error has occured \n${error}`))
+  .finally(() => console.log('Finally is called'))
 }
 

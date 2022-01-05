@@ -28,5 +28,8 @@
     "eslint": "^7.27.0",
     "nodemon": "^2.0.12",
     "npx": "^10.2.2"
+  },
+  "dependencies": {
+    "axios": "^0.24.0"
   }
 }
