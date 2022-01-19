@@ -1,6 +1,6 @@
 
 
-function first() {};
+function first() {}
 const secondFunction = function() {};
 
 

@@ -1,4 +1,4 @@
-
+// eslint-disable-next-line no-unused-vars
 const iPromise = (...args) => new Promise((resolve, reject) => {
   const number = Math.random()
   if (number > .5) return resolve(number)
