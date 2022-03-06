@@ -9,6 +9,7 @@
     "nodemon-eslint": "npx eslint **/*.js --fix  && npx nodemon app.js",
     "tdt": "eslint --fix tdt/ && nodemon index.js",
     "plain": "npx eslint ./plain/**/*.js --fix  && npx nodemon app.plain.js",
+    "oop": "npx eslint ./tutorial-02/**/*.js --fix && npx nodemon app.oop.js ",
     "start": "node app.js",
     "eslint": "npx eslint **/*.js"
   },

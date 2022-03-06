@@ -8,6 +8,7 @@ const isEvenB = (n) => {
   return n % 2 === 0 ? true : false 
 }
 
+// eslint-disable-next-line
 const isEvenString = (n) => {
  if (isEvenA(n)) return 'it is even'
  return 'it is odd'
@@ -17,6 +18,7 @@ const isEvenStringB = (n) => {
   return isEvenB(n) ? 'it\'s even' : 'it\'s odd'
 }
 
+// eslint-disable-next-line
 const numbers = (n) => {
   for (let i = 1; i < n; i++) console.log(`${i} -> ${isEvenStringB(i)}`)
 }
