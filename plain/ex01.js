@@ -6,9 +6,7 @@ function sumAll(a) {
   let sum = 0
   let [min, max] = a
   if (min > max) [max, min] = a
-  for (let i = min; i <= max; i++) {
-    sum += i
-  }
+  for (let i = min; i <= max; i++) sum += i
   return sum
 }
 
