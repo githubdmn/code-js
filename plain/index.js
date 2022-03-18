@@ -1,8 +1,8 @@
 
-const { run } = require('./oop.01')
+require('./ex01')
 
 exports.run = () => {
 	console.log('\nPlain\n')
-  run()
+ 
 }
 
