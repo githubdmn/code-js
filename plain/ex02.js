@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 function countOccurrences2(array, searchElement) {
 	return array.reduce((accumulator, currentValue) => {
 		let occurence = currentValue === searchElement ? 1 : 0;
