@@ -1,5 +1,5 @@
 
-require('./ex01')
+require('./ex02')
 
 exports.run = () => {
 	console.log('\nPlain\n')

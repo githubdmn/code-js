@@ -4,9 +4,10 @@
 	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 	"version": "0.2.0",
 	"configurations": [
+
 		{
-			"name": "Launch Program OOP",
-			"program": "${workspaceFolder}/app.oop.js",
+			"name": "Launch Program",
+			"program": "${workspaceFolder}/plain/index.js",
 			"request": "launch",
 			"skipFiles": [
 				"<node_internals>/**"
