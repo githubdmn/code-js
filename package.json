@@ -8,7 +8,7 @@
     "nodemon": "npx nodemon app.js",
     "nodemon-eslint": "npx eslint **/*.js --fix  && npx nodemon app.js",
     "tdt": "eslint --fix tdt/ && nodemon index.js",
-    "plain": "npx eslint ./plain/**/*.js --fix  && npx nodemon app.plain.js",
+    "plain": "npx prettier --write plain/*.js && npx eslint ./plain/**/*.js --fix  && npx nodemon app.plain.js",
     "oop": "npx eslint ./tutorial-02/**/*.js --fix && npx nodemon app.oop.js ",
     "start": "node app.js",
     "eslint": "npx eslint **/*.js"
@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
+    "prettier": "^2.6.2",
     "qrcode": "^1.5.0"
   }
 }

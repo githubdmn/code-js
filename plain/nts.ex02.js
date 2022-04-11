@@ -5,4 +5,3 @@
  * optional -> using math.random 20 times
  * c) a = [3, 5, 1, 2, 7, 7, 5]
  ***/
-

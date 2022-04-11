@@ -1,8 +1,5 @@
-
-require('./ex02')
+require('./ex02');
 
 exports.run = () => {
-	console.log('\nPlain\n')
- 
-}
-
+	console.log('\nPlain\n');
+};
