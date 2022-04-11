@@ -18,4 +18,3 @@ function countOccurrences3(array, searchElement) {
 
 const a1 = [2, 2, 3, 4, 2, 5, 6, 0, 9, 2];
 console.log(countOccurrences3(a1, 2));
-

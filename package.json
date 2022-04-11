@@ -30,11 +30,11 @@
   "devDependencies": {
     "eslint": "^7.32.0",
     "nodemon": "^2.0.12",
-    "npx": "^10.2.2"
+    "npx": "^10.2.2",
+    "prettier": "^2.6.2"
   },
   "dependencies": {
     "axios": "^0.24.0",
-    "prettier": "^2.6.2",
     "qrcode": "^1.5.0"
   }
 }
