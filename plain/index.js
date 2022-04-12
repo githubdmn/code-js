@@ -1,4 +1,4 @@
-require('./ex02');
+require('./ex03');
 
 exports.run = () => {
 	console.log('\nPlain\n');
