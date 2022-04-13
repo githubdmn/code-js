@@ -1,8 +1,11 @@
 function destroyer(array, ...args) {
-	for (let j = 0; j < args.length; j++)
-		for (let i = 0; i < array.length; i++)
-			if (array[i] === args[j]) array.splice(array.indexOf(array[i]), 1);
-	return array;
+	return array.filter((val) => !args.includes(val));
 }
 
-console.log(destroyer([2, 5, 3, 2, 4, 3, 2], 2, 4));
+function destroyerES5(array, ...args) {
+	return array.filter(function (val) {
+		return args.indexOf(val) == -1;
+	});
+}
+
+console.log(destroyerES5([2, 3, 2, 3, 3, 3, 2, 2], 2, 3)); // 0 2 5 6
