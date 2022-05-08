@@ -1,9 +1,6 @@
-// const ex01 = require('./ex01-cb-promise')
-const ex02 = require('./ex02-loop-async-await')
+/* eslint-disable no-unused-vars */
+const run01 = './ex01-cb-promise';
+const run02 = './ex02-loop-async-await';
+const run03 = './ex03-design-patterns';
 
-exports.run = () => {
-	console.log('run tdt 02')
-  // ex01.run()
-  ex02.run()
-}
-
+require(run03);

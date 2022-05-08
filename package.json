@@ -7,9 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "nodemon": "npx nodemon app.js",
     "nodemon-eslint": "npx eslint **/*.js --fix  && npx nodemon app.js",
-    "tdt": "eslint --fix tdt/ && nodemon index.js",
+    "tdt": "npx prettier --write tdt/ && npx eslint tdt/ && nodemon tdt/",
     "plain": "npx prettier --write plain/*.js && npx eslint ./plain/**/*.js --fix  && npx nodemon app.plain.js",
     "oop": "npx prettier --write tutorial-02/*.js && npx eslint ./tutorial-02/**/*.js --fix && npx nodemon app.oop.js ",
+    "nts:async": "npx prettier --write nts-async/*.js && npx eslint nts-async/**/*.js --fix && npx nodemon nts-async",
     "start": "node app.js",
     "eslint": "npx eslint **/*.js"
   },
