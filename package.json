@@ -5,12 +5,11 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "nodemon": "npx nodemon app.js",
-    "nodemon-eslint": "npx eslint **/*.js --fix  && npx nodemon app.js",
-    "tdt": "npx prettier --write tdt/ && npx eslint tdt/ && nodemon tdt/",
-    "plain": "nodemon plain/ --exec 'npx prettier --write plain/ && node '",
-    "oop": "npx prettier --write tutorial-02/*.js && npx eslint ./tutorial-02/**/*.js --fix && npx nodemon app.oop.js ",
-    "nts:async": "npx prettier --write nts-async/*.js && npx eslint nts-async/**/*.js --fix && npx nodemon nts-async",
+    "nodemon": "nodemon tdt/ --exec 'npx prettier --write tdt/ && node'",
+    "tdt": "nodemon tdt/ --exec 'npx prettier --write tdt/ && node'",
+    "plain": "nodemon plain/ --exec 'npx prettier --write plain/ && node'",
+    "oop":  "nodemon oop/ --exec 'npx prettier --write oop/ && node'",
+    "nts:async":  "nodemon nts-async/ --exec 'npx prettier --write nts-async/ && node'",
     "start": "node app.js",
     "eslint": "npx eslint **/*.js"
   },
