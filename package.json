@@ -8,7 +8,7 @@
     "nodemon": "nodemon tdt/ --exec 'npx prettier --write tdt/ && node'",
     "tdt": "nodemon tdt/ --exec 'npx prettier --write tdt/ && node'",
     "plain": "nodemon plain/ --exec 'npx prettier --write plain/ && node'",
-    "oop":  "nodemon oop/ --exec 'npx prettier --write oop/ && node'",
+    "oop":  "nodemon tutorial-02/ --exec 'npx prettier --write tutorial-02/ && node'",
     "nts:async":  "nodemon nts-async/ --exec 'npx prettier --write nts-async/ && node'",
     "start": "node app.js",
     "eslint": "npx eslint **/*.js"
