@@ -1,5 +1,4 @@
-require('./ex03');
-
-exports.run = () => {
-	console.log('\nPlain\n');
-};
+const ex01 = './ex01';
+const ntsAsync01 = './nts.async.01';
+console.log('------plain index---------');
+require(ntsAsync01);
