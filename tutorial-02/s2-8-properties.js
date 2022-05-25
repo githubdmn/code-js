@@ -12,6 +12,8 @@ function Item(id, title) {
 	};
 }
 
+console.log('Bracket notation is useful when identifiers have invalid form.');
+
 var item = new Item(2, 'Second');
 // item.log()
 // console.log(item['title'])
