@@ -8,5 +8,6 @@ var conProp = './s2-5-constructor-property';
 var fn = './s2-6-functions';
 var prop = './s2-8-properties';
 var enumProp = './s2-9-enumerating-properties';
+var private = './s2-10-private-members';
 
-require(enumProp);
+require(private);
