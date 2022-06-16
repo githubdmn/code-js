@@ -10,4 +10,6 @@ var prop = './s2-8-properties';
 var enumProp = './s2-9-enumerating-properties';
 var private = './s2-10-private-members';
 var getSet = './s2-11-get-set';
-require(getSet);
+var propDes = './s3-04-proprety-descriptor';
+
+require(propDes);
