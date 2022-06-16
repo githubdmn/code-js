@@ -12,5 +12,7 @@ var private = './s2-10-private-members';
 var getSet = './s2-11-get-set';
 var propDes = './s3-04-proprety-descriptor';
 var consProp = './s3-05-constructor-properties';
+var instancePrototypeMambers = './s3-06-instance-proto-members';
+var iteratingMembers = './s3-07-iterating-members';
 
-require(consProp);
+require(iteratingMembers);
