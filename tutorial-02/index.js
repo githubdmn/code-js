@@ -14,5 +14,12 @@ var propDes = './s3-04-proprety-descriptor';
 var consProp = './s3-05-constructor-properties';
 var instancePrototypeMambers = './s3-06-instance-proto-members';
 var iteratingMembers = './s3-07-iterating-members';
+var protInh = './s4-01-prot-inh';
+var resettingConstr = './s4-02-reset-constr';
+var superConstr = './s4-03-super-constr';
+var ext = './s4-04-extends';
+var fnoverride = './s4-05-fn-overriding.js';
+var polym = './s4-06-polym';
+var mixin = './s4-07-mixin.js';
 
-require(iteratingMembers);
+require(mixin);
