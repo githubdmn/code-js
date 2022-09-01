@@ -106,4 +106,5 @@ dist
 # Nano swp files
 *.swp
 
-
+tmp/
+*.tmp
