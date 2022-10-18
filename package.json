@@ -1,0 +1,30 @@
+{
+  "name": "jscode",
+  "version": "1.0.0",
+  "description": "JavaScript code snippets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx nodemon",
+    "start": "npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/githubdmn/jscode.git"
+  },
+  "keywords": [
+    "JavaScript",
+    "nodejs"
+  ],
+  "author": "Damjan Ivanovic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/githubdmn/jscode/issues"
+  },
+  "homepage": "https://github.com/githubdmn/jscode#readme",
+  "devDependencies": {
+    "eslint": "^8.25.0",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.7.1"
+  }
+}

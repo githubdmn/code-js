@@ -1,0 +1,6 @@
+{
+  "watch": ["src"],
+  "ext": ".js",
+  "ignore": [],
+  "exec": "npx prettier --config .prettierrc 'src/**/**/*.js' --write && node src"
+}
