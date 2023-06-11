@@ -5,5 +5,6 @@ const runFile08 = './08-factories';
 const runFile09 = './09-constructors';
 const runFile10 = './10-constructor-property';
 const runFile11 = './11-fn-are-objects';
+const runFile13 = './13-object-properties';
 
-require(runFile11);
+require(runFile13);
