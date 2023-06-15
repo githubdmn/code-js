@@ -6,5 +6,6 @@ const runFile09 = './09-constructors';
 const runFile10 = './10-constructor-property';
 const runFile11 = './11-fn-are-objects';
 const runFile13 = './13-object-properties';
+const runFile14 = './14-enumerating-properties';
 
-require(runFile13);
+require(runFile14);
