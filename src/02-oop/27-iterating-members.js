@@ -1,9 +1,9 @@
 console.log('\tIterating members');
 /**
- * A prototype property will be part of any object created 
- * from the so-called prototype, and this includes prototype 
- * chain. A instance property will be part of the whole 
- * instance, and in your case, it will part of any instance 
+ * A prototype property will be part of any object created
+ * from the so-called prototype, and this includes prototype
+ * chain. A instance property will be part of the whole
+ * instance, and in your case, it will part of any instance
  * because you're adding it within the constructor function
  */
 
