@@ -14,6 +14,7 @@ const runFile24 = './24-property-descriptors';
 const runFile25 = './25-constructor-prototype';
 const runFile26 = './26-prototype-vs-inheritance-members';
 const runFile27 = './27-iterating-members';
-const runFile34 = './34-prototypal-inheritance';
+const runFile32 = './32-prototypal-inheritance';
+const runFile33 = './33-resetting-the-constructor';
 
-require(runFile34);
+require(runFile33);
