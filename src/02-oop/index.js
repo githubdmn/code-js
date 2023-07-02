@@ -16,5 +16,8 @@ const runFile26 = './26-prototype-vs-inheritance-members';
 const runFile27 = './27-iterating-members';
 const runFile32 = './32-prototypal-inheritance';
 const runFile33 = './33-resetting-the-constructor';
+const runFile34 = './34-calling-super-constr';
+const runFile36 = './36-method-overriding';
+const runFile37 = './37-polymorphism';
 
-require(runFile33);
+require(runFile37);
