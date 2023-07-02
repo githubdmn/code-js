@@ -19,6 +19,7 @@ console.log('prototype of Circle.prototype.constructor() ', proto1);
 // To inherit the Shape object - now circle instace can access duplicate()
 Circle.prototype = Object.create(Shape.prototype);
 // Resetting the constructor!!! IMPORTANT
+// output without the following line { duplicate: [Function (anonymous)] }
 Circle.prototype.constructor = Circle;
 // now constructor is refering to Circle()
 var tmp2 = new Circle.prototype.constructor();
