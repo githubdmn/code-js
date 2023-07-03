@@ -19,5 +19,7 @@ const runFile33 = './33-resetting-the-constructor';
 const runFile34 = './34-calling-super-constr';
 const runFile36 = './36-method-overriding';
 const runFile37 = './37-polymorphism';
+const runFile45 = './45-js-classes';
+const runFile50 = './50-private-members';
 
-require(runFile37);
+require(runFile50);
