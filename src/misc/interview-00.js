@@ -1,5 +1,4 @@
-/**
- * Balanced Brackets
+/**         Balanced Brackets
 A bracket is considered to be any one of the following 
 characters: (, ), {, }, [, or ].
 Two brackets are considered to be a matched pair if the opening bracket 
@@ -40,35 +39,21 @@ YES
 
 Explanation
     1. The string {[()]} meets both criteria for being a balanced string.
-    2. The string {[(])} is not balanced because the brackets enclosed by the matched pair { and } are not balanced: [(]).
+    2. The string {[(])} is not balanced because the brackets enclosed by the 
+    matched pair { and } are not balanced: [(]).
     3. The string {{[[(())]]}} meets both criteria for being a balanced string.
 
 */
 
-const b1 = '{[()]}';
-const b2 = '{[(])}';
-const b3 = '{{[[(())]]}}';
+const input = ['{[()]}', '{[(])}', '{{[[(())]]}}'];
 
-function isBalanced(s) {
-  let openBrackets = [];
-  let arrayBracket = s.split('');
-  let reverse = s.split('').reverse();
-    console.log(arrayBracket, reverse);
-  for (i = 0; i < s.length / 2; i++) {
-    console.log(arrayBracket[i], reverse[i])
-    if (arrayBracket[i] === '(' && reverse[i] !== ')') return false;
-    if (arrayBracket[i] === '[' && reverse[i] !== ']') return false;
-    if (arrayBracket[i] === '{' && reverse[i] !== '}') return false;
-  }
-  return true;
-}
-
-function isBalanced(s) {
+function isBalancedA(s) {
   let open = [];
   let array = s.split('');
   for (i = 0; i < s.length; i++) {
-    if (array[i] === '(' || array[i] === '[' || array[i] === '{') open.push(array[i]);
-    console.log(array[i], open)
+    if (array[i] === '(' || array[i] === '[' || array[i] === '{')
+      open.push(array[i]);
+    // console.log(array[i], open);
     if (array[i] === ')' && open.pop() !== '(') return false;
     if (array[i] === ']' && open.pop() !== '[') return false;
     if (array[i] === '}' && open.pop() !== '{') return false;
@@ -76,7 +61,28 @@ function isBalanced(s) {
   return true;
 }
 
+function isBalancedB(s) {
+  let openBrackets = [];
+  let arrayBracket = s.split('');
+  let reverse = s.split('').reverse();
+  // console.log(arrayBracket, reverse);
+  for (i = 0; i < s.length / 2; i++) {
+    // console.log(arrayBracket[i], reverse[i]);
+    if (arrayBracket[i] === '(' && reverse[i] !== ')') return false;
+    if (arrayBracket[i] === '[' && reverse[i] !== ']') return false;
+    if (arrayBracket[i] === '{' && reverse[i] !== '}') return false;
+  }
+  return true;
+}
 
-console.log(isBalanced(b1));
-console.log(isBalanced(b2));
-console.log(isBalanced(b3));
+function callA(element) {
+  // let start = performance.now();
+  return isBalancedA(element); //, ' ', performance.now() - start;
+}
+
+function callB(element) {
+  // let start = performance.now();
+  return isBalancedB(element); //, ' ', performance.now() - start;
+}
+
+input.forEach((element) => console.log(callA(element), ' ', callB(element)));
