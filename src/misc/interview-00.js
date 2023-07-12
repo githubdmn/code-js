@@ -76,13 +76,18 @@ function isBalancedB(s) {
 }
 
 function callA(element) {
-  // let start = performance.now();
-  return isBalancedA(element); //, ' ', performance.now() - start;
+  console.time(isBalancedA.name);
+  console.log(isBalancedA(element));
+  console.timeEnd(isBalancedA.name);
 }
 
 function callB(element) {
-  // let start = performance.now();
-  return isBalancedB(element); //, ' ', performance.now() - start;
+  console.time(isBalancedB.name);
+  console.log(isBalancedA(element));
+  console.timeEnd(isBalancedB.name);
 }
 
-input.forEach((element) => console.log(callA(element), ' ', callB(element)));
+input.forEach((element) => {
+  callA(element);
+  callB(element);
+});
