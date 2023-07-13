@@ -1,6 +1,6 @@
 {
   "watch": ["src"],
-  "ext": ".js",
+  "ext": ".ts, .js",
   "ignore": [],
-  "exec": "npx prettier --config .prettierrc 'src/**/**/*.js' --write && node src"
+  "exec": "prettier --config .prettierrc 'src/**/*.ts' --write && ts-node ./src/index.ts && tsc"
 }
