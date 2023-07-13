@@ -4,6 +4,7 @@
 | --- | --------- |
 |   | |
 | 1 | [What is `libuv`?](#what-is-libuv)|  
+| 2 | [What are threads in NodeJS?](#what-are-threads-in-nodejs)|  
 
 
 ### 1. What is `libuv`?
@@ -51,7 +52,7 @@ through the Node.js APIs.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-What are threads in NodeJS?
+### 2. What are threads in NodeJS?
 
 In Node.js, the JavaScript code runs in a single-threaded event loop. 
 This means that by default, Node.js operates on a single thread and 
@@ -126,6 +127,8 @@ The code above creates a new worker thread using the `Worker` constructor and
 specifies the JavaScript file (`worker.js`) that will be executed in the worker
 thread. Messages can be exchanged between the main thread and the worker thread
 using `postMessage` and listening for the `'message'` event.
+
+**[ Back to Top ⬆ ](#table-of-contents)**
 
 How does NodeJS handle child threads?
 
