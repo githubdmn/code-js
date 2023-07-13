@@ -3,8 +3,8 @@
 | No. | Questions |
 | --- | --------- |
 |   | |
-| 1 | [What is `libuv`?](#what-is-libuv)|  
-| 2 | [What are threads in NodeJS?](#what-are-threads-in-nodejs)|  
+| 1 | [What is `libuv`?](#1.-what-is-libuv)|  
+| 2 | [What are threads in NodeJS?](#2.-what-are-threads-in-nodejs)|  
 
 
 ### 1. What is `libuv`?
