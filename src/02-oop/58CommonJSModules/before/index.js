@@ -1,4 +1,3 @@
-
 const _radius = new WeakMap();
 
 class Circle {

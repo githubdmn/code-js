@@ -1,4 +1,4 @@
-// Implementation Detail 
+// Implementation Detail
 const _radius = new WeakMap();
 
 // Public Interface
