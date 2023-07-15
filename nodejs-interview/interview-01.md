@@ -1,80 +1,132 @@
-### Table of Contents 
+# Table of contents
 
-| No. | Questions |
-| --- | --------- |
-| [](#) | |
-| [1](#1) | [What is `libuv`?](#what-is-libuv)|  
-| [2](#2) | [What are threads in NodeJS?] (#what-are-threads-in-nodejs)|  
-| [3](#3) | [What are processes in nodejs?](#what-are-processes-in-nodejs)|
-| [4](#4) | [What is nodejs `child_process`?](#what-is-nodejs-child_process)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
-| [](#) | [](#)|
+- [Table of contents](#table-of-contents)
+    - [1.](#1)
+    - [What is `libuv`?](#what-is-libuv)
+    - [2.](#2)
+    - [What are threads in NodeJS?](#what-are-threads-in-nodejs)
+    - [3.](#3)
+    - [What are processes in nodejs?](#what-are-processes-in-nodejs)
+    - [4.](#4)
+    - [What is nodejs `child_process`?](#what-is-nodejs-child_process)
+    - [5.](#5)
+    - [How are errors handled in asynchronous code?](#how-are-errors-handled-in-asynchronous-code)
+    - [6.](#6)
+    - [What is `process.nextTick()` used for?](#what-is-processnexttick-used-for)
+    - [7.](#7)
+    - [What is `event-driven` programming?](#what-is-event-driven-programming)
+    - [8.](#8)
+    - [What is `EventEmitter` in NodeJS?](#what-is-eventemitter-in-nodejs)
+    - [9.](#9)
+    - [Does NodeJS support multi-core computing? How to utilize more than one CPU core?](#does-nodejs-support-multi-core-computing-how-to-utilize-more-than-one-cpu-core)
+    - [10.](#10)
+    - [Describe what a stream is in NodeJS.](#describe-what-a-stream-is-in-nodejs)
+    - [11.](#11)
+    - [How many types of streams exist in NodeJS?](#how-many-types-of-streams-exist-in-nodejs)
+    - [12.](#12)
+    - [What kind of events can be fired by a stream?](#what-kind-of-events-can-be-fired-by-a-stream)
+    - [13.](#13)
+    - [What is piping in NodeJS?](#what-is-piping-in-nodejs)
+    - [14.](#14)
+    - [What is the purpose of `Buffer` class in NodeJS?](#what-is-the-purpose-of-buffer-class-in-nodejs)
+    - [15.](#15)
+    - [What's the difference between `readFile()` and `createReadStream()` in NodeJS?](#whats-the-difference-between-readfile-and-createreadstream-in-nodejs)
+    - [16.](#16)
+    - [What are basic operational errors in NodeJS?](#what-are-basic-operational-errors-in-nodejs)
+    - [17.](#17)
+    - [What are callbacks? What is the first argument of a callback funciton?](#what-are-callbacks-what-is-the-first-argument-of-a-callback-funciton)
+    - [18](#18)
+    - [What is callback hell and how can it be fixed?](#what-is-callback-hell-and-how-can-it-be-fixed)
+    - [19](#19)
+    - [What's the difference between NPM and NodeJS core modules?](#whats-the-difference-between-npm-and-nodejs-core-modules)
+    - [20](#20)
+    - [What is `package.json` and `package-lock.json`?](#what-is-packagejson-and-package-lockjson)
+    - [21](#21)
+    - [What are exit codes in NodeJS?](#what-are-exit-codes-in-nodejs)
+    - [22](#22)
+    - [What's the difference between `setTimeout()` and `setInterval()`?](#whats-the-difference-between-settimeout-and-setinterval)
+    - [23](#23)
+    - [Explain HTTP.](#explain-http)
+    - [25](#25)
+    - [What are HTTP methods?](#what-are-http-methods)
+    - [26](#26)
+    - [Caching strategies](#caching-strategies)
+    - [27](#27)
+    - [JS closures](#js-closures)
+    - [28](#28)
+    - [JS iterator](#js-iterator)
+    - [29](#29)
+    - [High order functions](#high-order-functions)
+    - [30](#30)
+    - [Hoisting](#hoisting)
+    - [31](#31)
+    - [SQL normalization and denormalization](#sql-normalization-and-denormalization)
+    - [32](#32)
+    - [SQL injection](#sql-injection)
+    - [33](#33)
+    - [SQL indexing](#sql-indexing)
+    - [35](#35)
+    - [SQL Trigger](#sql-trigger)
+    - [36](#36)
+    - [SQL Distinct and JOIN](#sql-distinct-and-join)
+    - [37](#37)
+    - [Continuous Integration (CI) and Continuous Delivery (CD)](#continuous-integration-ci-and-continuous-delivery-cd)
+    - [39](#39)
+    - [What is session?](#what-is-session)
+    - [40](#40)
+    - [What is sticky session?](#what-is-sticky-session)
+    - [41](#41)
+    - [What are cookies?](#what-are-cookies)
+    - [42](#42)
+    - [What is JWT?](#what-is-jwt)
+    - [43](#43)
+    - [what's the difference between cookie and jwt?](#whats-the-difference-between-cookie-and-jwt)
+    - [44](#44)
+    - [what is message queue?](#what-is-message-queue)
+    - [45](#45)
+    - [RabbitMQ](#rabbitmq)
+    - [46](#46)
+    - [](#)
+    - [47](#47)
+    - [](#-1)
+    - [48](#48)
+    - [](#-2)
+    - [49](#49)
+    - [](#-3)
+    - [50](#50)
+    - [](#-4)
+    - [](#-5)
+    - [](#-6)
+    - [](#-7)
+    - [](#-8)
+    - [](#-9)
+    - [](#-10)
+    - [](#-11)
+    - [](#-12)
+    - [](#-13)
+    - [](#-14)
+    - [](#-15)
+    - [](#-16)
+    - [](#-17)
+    - [](#-18)
+    - [](#-19)
+    - [](#-20)
+    - [](#-21)
+    - [](#-22)
+    - [](#-23)
+    - [](#-24)
+    - [](#-25)
+    - [](#-26)
+    - [](#-27)
+    - [](#-28)
+    - [](#-29)
+    - [](#-30)
+    - [](#-31)
+    - [](#-32)
+    - [](#-33)
+    - [](#-34)
+    - [](#-35)
+    - [](#-36)
 
 ### 1. 
 ### What is `libuv`?
@@ -2724,11 +2776,6 @@ distributed applications and systems.
 **[ Back to Top ⬆ ](#table-of-contents)**
 
 ### 48
-###
-
-**[ Back to Top ⬆ ](#table-of-contents)**
-
-###
 ###
 
 **[ Back to Top ⬆ ](#table-of-contents)**
