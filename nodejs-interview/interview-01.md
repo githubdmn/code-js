@@ -2193,14 +2193,596 @@ on integrating and testing code changes, while Continuous Delivery extends the
 process to automate the release and deployment aspects.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
-**[ Back to Top ⬆ ](#table-of-contents)**
-**[ Back to Top ⬆ ](#table-of-contents)**
-**[ Back to Top ⬆ ](#table-of-contents)**
-**[ Back to Top ⬆ ](#table-of-contents)**
-**[ Back to Top ⬆ ](#table-of-contents)**
-**[ Back to Top ⬆ ](#table-of-contents)**
-**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 39
+### What is session?
+
+In the context of web development, a session refers to a period of interaction 
+between a user and a web application. It represents a way to maintain stateful 
+information about a user's interactions across multiple requests and responses. 
+Sessions enable the web application to recognize and remember individual users, 
+allowing for personalized experiences and data persistence.
+
+Here's how sessions typically work:
+
+- `Session Creation`: 
+  When a user first visits a web application, the server creates a unique session 
+  for that user. A session ID is generated, which serves as a unique identifier 
+  for the session.
+
+- `Session Storage`: 
+  The session ID is stored on the server, typically in memory or a database. 
+  This allows the server to associate the session ID with the user's session data.
+
+- `Session ID Transmission`: 
+  The session ID is sent back to the client, usually as a cookie or appended to 
+  the URL. The client includes the session ID in subsequent requests to the server, 
+  allowing the server to identify and retrieve the corresponding session data.
+
+- `Session Data`: The session data contains information specific to the user's 
+  session, such as user authentication status, shopping cart contents, or user 
+  preferences. This data is associated with the session ID on the server and can 
+  be accessed and modified during the user's interaction with the web application.
+
+- `Session Lifetime`: 
+  Sessions have a defined lifetime or expiration time, after which they are 
+  considered expired. The expiration can be based on factors like inactivity, 
+  a specific duration, or specific logout actions. Once a session expires, 
+  the user will need to reauthenticate or create a new session.
+
+Sessions offer several benefits in web development:
+
+- `User Identification`: 
+  Sessions provide a way to identify individual users, allowing the server to 
+  distinguish between different users and provide personalized experiences.
+
+- `Stateful Interactions`: 
+  With sessions, a web application can remember user-specific information across 
+  multiple requests. This enables features like persistent login, remembering 
+  user preferences, or maintaining the contents of a shopping cart.
+
+- `Security`: 
+  Sessions can play a role in user authentication and authorization. By storing 
+  session data on the server, sensitive information like user credentials or 
+  access rights can be securely managed, reducing the risk of exposing critical 
+  data on the client-side.
+
+It's important to note that session management should consider security aspects 
+to prevent session hijacking or other vulnerabilities. Techniques like session 
+expiration, secure session storage, and proper session ID handling help ensure 
+session security.
+
+Different web frameworks and platforms provide mechanisms for managing sessions. 
+Common approaches include using server-side sessions stored in memory, databases, 
+or external session stores. Session handling libraries or middleware in web 
+frameworks often abstract the underlying details and provide easy-to-use APIs 
+for working with sessions.
+
+Overall, sessions are a fundamental concept in web development that allow for 
+maintaining user-specific state and providing personalized experiences in stateless 
+`HTTP` protocols.
+
 **[ Back to Top ⬆ ](#table-of-contents)**
 
+### 40
+### What is sticky session?
+
+`Sticky sessions`, also known as session affinity or session persistence, 
+is a technique used in load balancing scenarios to ensure that requests from 
+a particular client are consistently directed to the same backend server or 
+instance during a session.
+
+In a distributed server environment with multiple backend servers or instances, 
+load balancers are used to distribute incoming requests across these servers to 
+achieve better scalability, fault tolerance, and performance. Each request from 
+a client is directed to one of the backend servers based on the load balancing 
+algorithm employed.
+
+However, certain applications require maintaining session state or context 
+information on the server side to provide a seamless user experience. This is 
+where sticky sessions come into play. With sticky sessions, once a client 
+establishes a session with a specific backend server, subsequent requests from 
+that client within the same session are directed to the same server. The load 
+balancer identifies the client using various methods like the client's `IP address`, 
+`session ID`, or `cookies`, and ensures that all requests from that client are routed 
+to the same backend server.
+
+The main benefits of sticky sessions include:
+
+- `Session Persistence`: 
+  Sticky sessions ensure that all requests from a client within a session are 
+  handled by the same server. This allows the server to maintain session state, 
+  such as user login information, shopping cart contents, or other session-related 
+  data, without the need for complex session sharing mechanisms.
+
+- `Consistent User Experience`: 
+  By directing all requests from a client to the same server, sticky sessions 
+  preserve the context and session-specific data, providing a consistent user 
+  experience throughout the session. This can be particularly important for 
+  applications that rely on session-based state, such as e-commerce platforms 
+  or online banking.
+
+It's important to note that sticky sessions may have some **drawbacks**:
+
+`Load Imbalance`: 
+Sticky sessions can lead to uneven distribution of load among backend servers if 
+the client distribution is not uniform. This can result in certain servers being 
+more heavily loaded than others.
+
+`Session Survivability`: 
+Sticky sessions rely on maintaining session affinity, 
+which means that if the assigned backend server becomes unavailable, the session 
+may be lost. Additional measures like session replication or backup servers may 
+be needed to address this concern.
+
+`Scalability`: 
+Sticky sessions may limit the scalability of the system since the load balancer 
+needs to maintain session affinity information. As the number of clients and 
+sessions increase, the load balancer's capacity and memory requirements may 
+become a bottleneck.
+
+Sticky sessions can be configured and managed at the load balancer level, 
+which can be implemented using hardware load balancers, software load balancers, 
+or cloud-based load balancing services. The specific implementation and 
+configuration details may vary depending on the load balancer or the technology 
+stack being used.
+
+Overall, sticky sessions provide a mechanism to maintain session affinity in 
+distributed server environments, enabling applications to preserve session state 
+and provide consistent user experiences across multiple requests within a session.
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 41
+### What are cookies?
+In the context of web development, a cookie is a small piece of data stored on 
+the client-side (usually a web browser) by a website. Cookies are used to store 
+information about the user or their interaction with the website, allowing for 
+personalized experiences, session management, and tracking.
+
+Here are some key points about cookies:
+
+`Client-Side Storage`: 
+Cookies are stored on the client-side, typically in the user's web browser.
+They are stored as small text files and have a maximum size limit (usually a few kilobytes).
+
+`Persistent Storage`: 
+Cookies can have an expiration date, after which they are automatically deleted 
+by the browser. These are called persistent cookies. However, cookies can also be 
+set without an expiration date, and they are stored until the user clears their 
+browser's cookies or the website removes them.
+
+`Domain and Path`: 
+Cookies are associated with a specific domain and path. The browser includes 
+cookies in subsequent requests to that domain and path, allowing the server to 
+retrieve the stored information.
+
+`HTTP Communication`: 
+Cookies are sent between the client and server through HTTP headers. When a user 
+visits a website, the server can send a Set-Cookie header to set a cookie on the 
+client-side. The browser then includes the cookie in subsequent requests to that 
+domain and path using the Cookie header.
+
+`State Management`: 
+Cookies are commonly used for session management, enabling the server to recognize 
+and remember users between requests. A unique session ID can be stored in a cookie, 
+allowing the server to associate subsequent requests with a specific session.
+
+`Personalization`: 
+Cookies can be used to store user preferences, such as language settings or 
+display preferences. By storing this information in a cookie, the website can 
+provide a personalized experience for each user.
+
+`Tracking and Analytics`: 
+Cookies are frequently used for tracking user behavior and gathering analytics data. 
+Websites can store information about user visits, page views, click events, 
+or other interactions to analyze user patterns and improve their services.
+
+It's important to note that cookies have some limitations and considerations:
+
+`Privacy and Security`: 
+Cookies can potentially store sensitive information. It's essential to handle 
+and store cookies securely to protect user privacy. Modern web standards, such 
+as the SameSite attribute and secure cookies (using HTTPS), help mitigate certain 
+security risks associated with cookies.
+
+`User Consent`: 
+In many regions, regulations require websites to obtain user consent for using 
+cookies, particularly those used for tracking or targeting advertising.
+
+`Browser Limitations`: 
+Browsers have limits on the number of cookies that can be stored per domain and 
+the overall storage size. Exceeding these limits can cause issues with cookie functionality.
+
+Web developers can interact with cookies using JavaScript through the `document.cookie API`, 
+which allows for reading, writing, and deleting cookies on the client-side.
+
+It's worth noting that there are alternative mechanisms for client-side storage, 
+such as **`Web Storage`** (`localStorage` and `sessionStorage`) and `IndexedDB`, 
+which provide more storage capacity and additional features but have different 
+use cases compared to cookies.
+
+Overall, cookies are a widely used mechanism in web development for storing small 
+amounts of data on the client-side, facilitating personalized experiences, 
+session management, and tracking user interactions.
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 42
+### What is JWT?
+
+JWT stands for JSON Web Token. It is an open standard (RFC 7519) for securely 
+transmitting information between parties as a JSON object. JWTs are commonly 
+used for authentication and authorization in web applications.
+
+Here are some key points about JWTs:
+
+- `Structure`: 
+JWTs consist of three parts separated by dots (`.`): 
+  - `the header`, 
+  - `the payload`, 
+  - and `the signature`. 
+  The header specifies the token type and the cryptographic algorithm used to 
+  sign the token. The payload contains the claims, which are statements about 
+  an entity (e.g., user) and additional data. The signature is generated using 
+  the header, payload, and a secret key, ensuring the token's integrity.
+
+- `Statelessness`: 
+  JWTs are stateless, meaning that the server does not need to store session 
+  information. All the necessary information is contained within the token 
+  itself. This makes JWTs suitable for distributed systems and APIs, where the 
+  server can validate the token without relying on session storage.
+
+- `Authentication`: 
+  JWTs are commonly used for authentication purposes. After a user logs in, 
+  the server can generate a JWT and send it back to the client. The client 
+  includes the JWT in subsequent requests, typically in the Authorization header. 
+  The server can then verify the authenticity of the token, extract the user 
+  information from the payload, and grant access to protected resources.
+
+- `Authorization`: 
+  JWTs can also carry authorization information. Along with user claims, 
+  the payload of a JWT can include additional data such as user roles 
+  or permissions. This allows the server to make authorization decisions 
+  based on the information present in the token.
+
+- `Secure Transmission`: 
+  JWTs can be transmitted over secure channels, such as HTTPS, to ensure that 
+  the token is not intercepted or tampered with during transmission. 
+  The signature ensures the integrity of the token and prevents unauthorized 
+  modifications.
+
+- `Compact and Self-Contained`: 
+  JWTs are designed to be compact and self-contained, as they include all the 
+  necessary information within the token itself. This simplifies token handling 
+  and reduces the need for additional server-side storage or database lookups.
+
+JWTs have become popular in modern web applications due to their flexibility, 
+scalability, and ease of implementation. They provide a standardized way to 
+authenticate and authorize users without the need for session storage on the 
+server-side. However, it's important to implement JWTs securely, handle token 
+expiration and revocation, and protect the token secret/key 
+to prevent unauthorized access.
+
+JWTs can be generated and verified using various programming languages and 
+frameworks, as libraries and modules are available to simplify the process. 
+It's recommended to use trusted and well-maintained libraries when working with 
+JWTs to ensure proper security measures are in place.
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 43
+### what's the difference between cookie and jwt?
+
+`Cookies` and `JSON Web Tokens` (`JWT`s) are both used for transmitting data 
+between client and server in web applications, but there are some fundamental 
+differences between them:
+
+1. `Data Format`:
+
+`Cookies`:
+  Cookies are primarily stored on the client-side as small text files. 
+  They consist of key-value pairs and are managed by the browser. Cookies 
+  are automatically sent with each HTTP request to the server.
+`JWTs`: 
+  JWTs are self-contained tokens that are typically transmitted as a string in 
+  the HTTP Authorization header or as a parameter in the URL. They are structured 
+  as a JSON object and contain the necessary information (claims) within the token itself.
+
+2. `Statefulness`:
+
+  - `Cookies`: Cookies are stateful and are primarily used for session management. 
+The server maintains session data associated with a specific cookie on the 
+server-side, and the client includes the cookie in subsequent requests to 
+associate with the correct session.
+  - `JWTs`: JWTs are stateless. All the necessary information, including user claims 
+and other data, is contained within the token itself. The server can validate 
+and extract the information from the token without relying on server-side 
+session storage.
+
+3. `Security`:
+
+  - `Cookies`: 
+  Cookies have some built-in security mechanisms such as the "HttpOnly" flag 
+  that prevents access to cookies from JavaScript, reducing the risk of 
+  **`cross-site scripting (XSS)`** attacks. However, cookies can be vulnerable to 
+  **`cross-site request forgery (CSRF)`** attacks if not properly protected.
+ -  `JWTs`: 
+  JWTs can be more secure when implemented correctly. They support digital 
+  signatures to verify the integrity of the token, preventing tampering. 
+  JWTs can also include additional security measures like encryption to protect 
+  the contents of the token. However, care must be taken to secure the secret/key 
+  used for signing the tokens and to validate token expiration and revocation.
+
+4. `Usage and Flexibility`:
+
+   - `Cookies`: 
+    Cookies have been widely used for a long time and are supported by all browsers. 
+    They are often used for various purposes, including session management, 
+    user authentication, and storing small amounts of data on the client-side.
+   - `JWT`s: 
+    JWTs have gained popularity in modern web development due to their flexibility 
+    and independence from server-side storage. They are often used for stateless 
+    authentication and authorization, allowing for secure communication between 
+    services in distributed systems and `API`s.
+
+Choosing between cookies and JWTs depends on the specific use case and requirements 
+of the application. Cookies are well-suited for session management and are 
+automatically sent by the browser with each request. JWTs, on the other hand, 
+offer more flexibility, statelessness, and control over the token data, making 
+them suitable for API authentication and authorization scenarios where server-side 
+state storage is not desired.
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+
+### 44
+### what is message queue?
+
+A message queue is a communication pattern and a type of asynchronous messaging 
+system used in distributed systems. It provides a way for different components 
+or systems to exchange messages and decouples the sender and receiver, allowing 
+them to work independently.
+
+In a message queue system, messages are sent by producers (senders) and received
+ by consumers (receivers). The messages are stored in a queue until they are processed 
+ by the consumer. The key characteristics of message queues include:
+
+1. `Asynchronous Communication`: 
+  Message queues enable asynchronous communication between components or systems. 
+  The sender can send a message and continue its operation without waiting for an 
+  immediate response from the receiver.
+
+2. `Decoupling`: 
+  Message queues decouple the sender and receiver, meaning they are not directly 
+  dependent on each other. The sender does not need to know the identity or location 
+  of the receiver, and vice versa. This decoupling allows for flexibility, scalability, 
+  and resilience in distributed systems.
+
+3. `Reliable Message Delivery`: 
+  Message queues ensure reliable message delivery. Once a message is placed in 
+  the queue, it is typically persisted and kept until the consumer successfully 
+  processes it. This ensures that messages are not lost even if the sender or 
+  receiver experiences temporary failures.
+
+4. `Message Ordering`: 
+  Message queues often preserve the order of messages within a single queue. 
+  This means that the messages are processed in the same order they were received, 
+  ensuring the sequence of operations.
+
+5. `Scalability`: 
+  Message queues support scalable architectures. Multiple producers can send 
+  messages concurrently, and multiple consumers can process messages simultaneously. 
+  This allows for horizontal scaling and handling increased message loads.
+
+6. `Load Balancing`: 
+  Message queues can distribute the workload among multiple consumers by balancing 
+  the message processing across them. This enables efficient utilization of 
+  resources and prevents bottlenecks.
+
+7. `Message Persistence`: 
+  Messages in a message queue are typically persisted to ensure durability. 
+  Even if a system restarts or fails, the messages are not lost, allowing for 
+  reliable processing and recovery.
+
+Message queues are widely used in various scenarios, including:
+
+Decoupling microservices in a `service-oriented architecture` (SOA).
+Implementing `event-driven architecture`s (EDA) and `publish-subscribe patterns`.
+Enabling `inter-process communication` (IPC) between different components.
+Handling high-volume data processing and asynchronous tasks.
+Supporting distributed systems and scalable messaging systems.
+Popular message queue implementations and technologies include `RabbitMQ`, 
+`Apache Kafka`, `Amazon Simple Queue Service` (`SQS`), and `Redis Pub/Sub`. 
+These systems provide features and capabilities to ensure reliable message 
+delivery, scalability, and fault tolerance.
+
+Using message queues can improve system performance, scalability, and fault 
+tolerance by decoupling components, enabling asynchronous communication, and 
+providing reliable message delivery. However, it also adds complexity to the 
+system architecture and requires careful design and consideration of message 
+handling and processing scenarios.
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 45
+### RabbitMQ
+
+`RabbitMQ` is a widely used open-source message broker that implements the 
+`Advanced Message Queuing Protocol` (AMQP). It provides a reliable and scalable 
+messaging system for distributed applications and systems.
+
+Here are some key features and concepts related to `RabbitMQ`:
+
+1. `Message Broker`: 
+  `RabbitMQ` acts as a message broker, receiving messages from producers and 
+  delivering them to consumers. It provides a central hub for message exchange 
+  between different components of a system.
+
+2. `Queues`: 
+  Messages sent to `RabbitMQ` are stored in queues. Queues hold the messages 
+  until they are consumed by the intended receiver. `RabbitMQ` ensures that 
+  messages in the queue are delivered in the order they were received.
+
+3. `Exchanges`: 
+  Exchanges are the entities in RabbitMQ responsible for routing messages to the 
+  appropriate queues. Producers send messages to exchanges, which then determine 
+  how to route the messages based on certain criteria, such as message headers, 
+  routing keys, or specific routing algorithms.
+
+4. `Routing Keys and Bindings`: 
+  When a message is sent to an exchange, it is associated with a routing key. 
+  Exchanges use bindings to determine which queues should receive messages based 
+  on their routing keys. This allows for flexible and dynamic message routing.
+
+5. `Publish-Subscribe`: 
+  `RabbitMQ` supports the publish-subscribe messaging pattern. Multiple consumers 
+  can subscribe to an exchange and receive messages from it. This pattern is useful 
+  when broadcasting messages to multiple consumers or implementing a fanout mechanism.
+
+6. `Message Acknowledgment`: 
+  `RabbitMQ` provides a mechanism for message acknowledgment. Consumers can 
+  acknowledge the receipt and successful processing of messages. If a message 
+  is not acknowledged within a certain time, `RabbitMQ` assumes it has not been 
+  processed and can re-queue it for another consumer to handle.
+
+7. `Durability`: 
+  `RabbitMQ` allows for durable message queues and exchanges, ensuring that 
+  messages and configurations are persisted even if the server restarts. This 
+  ensures message reliability and prevents data loss.
+
+8. `Clustering and High Availability`: 
+  `RabbitMQ` supports clustering, enabling multiple `RabbitMQ` nodes to work 
+  together as a single logical broker. This provides scalability, load balancing, 
+  and high availability by distributing queues and message processing across multiple nodes.
+
+`RabbitMQ` is used in various scenarios, including:
+
+Decoupling and asynchronous communication in microservices architectures.
+Task and job distribution systems.
+Event-driven architectures and event sourcing.
+Reliable message processing and delivery in distributed systems.
+`RabbitMQ` provides client libraries and supports multiple programming languages, 
+making it accessible and usable in different technology stacks. It has a rich 
+ecosystem of plugins, integrations, and tools that enhance its capabilities and 
+enable integration with other systems.
+
+With its robust features, `RabbitMQ` facilitates reliable and scalable messaging, 
+enabling efficient communication and coordination between different components of 
+distributed applications and systems.
+
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+###
+###
+
+**[ Back to Top ⬆ ](#table-of-contents)**
 
 
