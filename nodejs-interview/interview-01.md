@@ -133,11 +133,10 @@
 
 `libuv` is a multi-platform C library that provides asynchronous event-driven
 programming support for building high-performance and scalable network applications.
-It's used as a core component in NodeJS runtime to handle I/O operations,
-  such as network I/O,
-  file system operations, 
-  and timers
-Non-blockingly and efficently
+It's used as a core component in NodeJS runtime to handle I/O operations, such as:
+ - network I/O,
+ - file system operations, 
+ - and timers
 
 `libuv` serves as the underlying engine for handling I/O and event-driven 
 programming in Node.js. It enables Node.js to efficiently manage asynchronous 
