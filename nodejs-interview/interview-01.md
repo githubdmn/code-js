@@ -2,11 +2,11 @@
 
 | No. | Questions |
 | --- | --------- |
-|   | |
-| 1 | [What is `libuv`?](#what-is-libuv)|  
-| 2 | [What are threads in NodeJS?](#what-are-threads-in-nodejs)|  
-| 3 | [What are processes in nodejs?](#what-are-processes-in-nodejs)|
-| 4 | [What is nodejs `child_process`?](#what-is-nodejs-child_process)|
+| [](#) | |
+| [1](#1) | [What is `libuv`?](#what-is-libuv)|  
+| [2](#2) | [What are threads in NodeJS?]|  
+| [3](#3) | [What are processes in nodejs?](#what-are-processes-in-nodejs)|
+| [4](#4) | [What is nodejs `child_process`?](#what-is-nodejs-child_process)|
 |  | [](#)|
 |  | [](#)|
 |  | [](#)|
@@ -503,111 +503,1704 @@ than one CPU core for improved performance and scalability. By default, Node.js
 runs on a single thread, but you can leverage the following techniques to take 
 advantage of multiple CPU cores:
 
-**[ Back to Top ⬆ ](#table-of-contents)**
+1. `Cluster Module`: 
+  The Cluster module in Node.js allows you to create a cluster of `worker processes` 
+  that share the same server port. Each worker process runs in a separate Node.js 
+  instance and can handle incoming requests. The Cluster module simplifies load 
+  balancing and utilizes multiple CPU cores effectively.
+  ```
+  const cluster = require('cluster');
+  const http = require('http');
+  const numCPUs = require('os').cpus().length;
 
-Describe what a stream is in NodeJS.
+  if (cluster.isMaster) {
+    console.log(`Master ${process.pid} is running`);
 
-**[ Back to Top ⬆ ](#table-of-contents)**
+    // Fork worker processes
+    for (let i = 0; i < numCPUs; i++) {
+      cluster.fork();
+    }
 
-How many types of streams exist in NodeJS?
+    cluster.on('exit', (worker, code, signal) => {
+      console.log(`Worker ${worker.process.pid} died`);
+    });
+  } else {
+    // Worker process: start your server
+    http.createServer((req, res) => {
+      res.writeHead(200);
+      res.end('Hello, World!');
+    }).listen(3000);
 
-**[ Back to Top ⬆ ](#table-of-contents)**
+    console.log(`Worker ${process.pid} started`);
+  }
+  ```
+  In the example, the master process creates multiple worker processes using 
+  `cluster.fork()`. Each worker process handles incoming `HTTP` requests by 
+  starting its own server. The Cluster module automatically distributes incoming 
+  connections among the `worker processes`, effectively utilizing multiple CPU cores.
 
-What kind of events can be fired by a stream?
+2. `Child Processes`: 
+  Node.js provides the `child_process` module, which allows you to spawn additional 
+  child processes that run separate Node.js instances. You can offload CPU-intensive 
+  or blocking tasks to child processes, freeing up the main event loop for other operations.
+  ```
+  const { spawn } = require('child_process');
 
-**[ Back to Top ⬆ ](#table-of-contents)**
+  const child = spawn('node', ['child.js']);
 
-What is piping in NodeJS?
+  child.stdout.on('data', (data) => {
+    console.log(`Child process output: ${data}`);
+  });
 
-**[ Back to Top ⬆ ](#table-of-contents)**
+  child.on('exit', (code) => {
+    console.log(`Child process exited with code ${code}`);
+  });
+  ```
+  In the example, a child process is spawned using `child_process.spawn()`. 
+  The child process runs a separate Node.js script (child.js), and the parent 
+  process communicates with the child process through standard input/output 
+  streams or message passing.
 
-What is the purpose of `Buffer` class in NodeJS?
+  These techniques allow you to distribute the workload across multiple CPU cores, 
+  resulting in better utilization of system resources, improved performance, and 
+  increased scalability. However, keep in mind that the optimal approach may depend 
+  on the nature of your application and specific use cases.
 
-**[ Back to Top ⬆ ](#table-of-contents)**
+  It's worth noting that Node.js also provides libraries and frameworks that abstract 
+  the complexities of multi-core computing, such as the `cluster` module in the core 
+  library or external solutions like `PM2`, which offer additional features for 
+  process management, monitoring, and automatic scaling in multi-core environments.
 
-What's the difference between `readFile()` and `createReadStream()` in NodeJS?
 
-**[ Back to Top ⬆ ](#table-of-contents)**
-
-What are basic operational errors in NodeJS?
-
-**[ Back to Top ⬆ ](#table-of-contents)**
-
-What are callbacks? What is the first argument of a callback funciton?
-
-**[ Back to Top ⬆ ](#table-of-contents)**
-
-What is promise and async/await?
-
-**[ Back to Top ⬆ ](#table-of-contents)**
-
-What is callback hell and how can it be fixed?
-
-**[ Back to Top ⬆ ](#table-of-contents)**
-
-What's the difference between NPM and NodeJS core modules?
-
-**[ Back to Top ⬆ ](#table-of-contents)**
-
-What is `package.json` and `package-lock.json`?
-
-**[ Back to Top ⬆ ](#table-of-contents)**
-
-What are exit codes in NodeJS?
-
-**[ Back to Top ⬆ ](#table-of-contents)**
-
-What's the difference between `setTimeout()` and `setInterval()`?
-
-**[ Back to Top ⬆ ](#table-of-contents)**
-
-Explain HTTP.
-
-**[ Back to Top ⬆ ](#table-of-contents)**
-
-What are HTTP methods?
-
-**[ Back to Top ⬆ ](#table-of-contents)**
-
-Which HTTP methods are idempotent?
-
-**[ Back to Top ⬆ ](#table-of-contents)**
-
-Caching strategies.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-Explain CI/CD
+### 10.
+### Describe what a stream is in NodeJS.
+
+In Node.js, a stream is an abstract interface that provides a way to read or write 
+data in a continuous and efficient manner. Streams are a core concept in Node.js 
+and are used extensively for handling I/O operations, such as reading from or writing 
+to files, network communication, and data transformations.
+
+Streams provide the following benefits:
+
+1. `Efficient Handling of Large Data`: 
+  Streams allow you to process data in smaller 
+  chunks rather than loading the entire data into memory. This makes streams 
+  memory-efficient, as they can handle large amounts of data without consuming 
+  excessive memory.
+
+2. `Non-Blocking and Asynchronous`: 
+  Streams operate asynchronously, allowing data to be processed while it is 
+  being read or written. This non-blocking behavior ensures that other operations 
+  can continue without waiting for the stream to complete, improving the overall 
+  performance and responsiveness of the application.
+
+3. `Piping and Chaining`: 
+  Streams can be easily piped together, allowing data to flow from one stream to 
+  another. This enables powerful data processing workflows, where multiple stream 
+  operations can be chained together, reducing the need for intermediate buffers 
+  and simplifying the code.
+
+4. `Event-Based Processing`: 
+  Streams emit events that can be used to monitor and control the data flow. Events 
+  like `'data'` (when new data is available), `'end'` (when the stream has finished), 
+  and `'error'` (when an error occurs) allow you to handle different scenarios and 
+  take appropriate actions.
+
+There are several types of streams in Node.js:
+
+1. `Readable Streams`: 
+  Readable streams allow you to read data from a source, such as a file or network 
+  request. Examples include `fs.createReadStream()` for reading from files and 
+  `http.IncomingMessage` for reading `HTTP` requests.
+
+2. `Writable Streams`: 
+  Writable streams allow you to write data to a destination, such as a file or 
+  network response. Examples include `fs.createWriteStream()` for writing to files 
+  and `http.ServerResponse` for writing `HTTP` responses.
+
+3. `Duplex Streams`: 
+  Duplex streams can both read and write data. Examples include network sockets 
+  and `net.Socket` in Node.js.
+
+4. `Transform Streams`: 
+  Transform streams are a special type of duplex stream that allows you to modify 
+  or transform the data as it passes through the stream. Examples include `zlib` 
+  for compression and decompression and `crypto` for encryption and decryption.
+
+Streams provide a unified and consistent interface for handling different types 
+of data and enable efficient processing of data in a variety of scenarios. They 
+are a fundamental part of Node.js `I/O` operations and play a significant role 
+in building high-performance and scalable applications.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-JS iterator
+### 11.
+### How many types of streams exist in NodeJS?
+
+1. `Readable Streams`: 
+  Readable streams allow you to read data from a source. They are the source of 
+  data in a stream. Readable streams provide an interface for consuming data in 
+  chunks or individual pieces as they become available. Examples of readable 
+  streams in Node.js include reading from files (`fs.createReadStream()`) and 
+  reading `HTTP requests` (`http.IncomingMessage`).
+
+2. `Writable Streams`: 
+  Writable streams allow you to write data to a destination. They are the destination 
+  of data in a stream. Writable streams provide an interface for writing data in 
+  chunks or individual pieces. Examples of writable streams in Node.js include 
+  writing to files (`fs.createWriteStream()`) and 
+  writing HTTP responses (`http.ServerResponse`).
+
+3. `Duplex Streams`: 
+  Duplex streams can both read and write data. They provide an interface for both 
+  consuming and producing data. Duplex streams are bidirectional and allow for 
+  simultaneous reading and writing. Network sockets and the `net.Socket` class in 
+  Node.js are examples of duplex streams.
+
+4. `Transform Streams`: 
+  Transform streams are a special type of duplex stream that allow you to modify 
+  or transform the data as it passes through the stream. They take input, process 
+  it in some way, and produce output. Transform streams can be used to compress 
+  or decompress data, encrypt or decrypt data, or perform any other data transformation. 
+  Examples of transform streams in Node.js include compression/decompression 
+  streams (`zlib`) and encryption/decryption streams (`crypto`).
+
+These four types of streams provide a versatile and unified interface for working 
+with data in a streaming fashion. They allow for efficient and asynchronous processing 
+of data, enabling developers to build high-performance and scalable applications 
+in Node.js.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-High order functions
+### 12.
+### What kind of events can be fired by a stream?
+
+1. `data`: 
+  This event is emitted when new data is available to be consumed from a readable 
+  stream. The event handler receives the chunk of data as an argument.
+
+2. `end`: 
+  The end event is emitted when a readable stream has reached the end of its data. 
+  It indicates that there is no more data to be read.
+
+3. `error`: 
+  The error event is emitted when an error occurs in a stream. It can be emitted 
+  by both readable and writable streams. The event handler receives the error 
+  object as an argument.
+
+4. `finish`: 
+  This event is emitted by a writable stream when all data has been written and 
+  no more data will be written. It indicates that the writing process has completed.
+
+5. `close`: 
+  The close event is emitted when a stream is fully closed. It indicates that 
+  all resources associated with the stream have been released.
+
+6. `drain`: 
+  The drain event is emitted by a writable stream when it is ready to receive 
+  more data after the internal buffer has been drained. It is commonly used in 
+  backpressure scenarios to control the flow of data.
+
+7. `pipe/unpipe`:
+  These events are emitted when a readable stream is piped to or unpiped from a 
+  writable stream. They allow for monitoring and controlling the piping process.
+
+8. `readable`: 
+  The readable event is emitted by a readable stream to indicate that data is 
+  available to be read. It is typically used with streams in non-flowing mode to 
+  manually trigger the reading process.
+
+These are some of the commonly used events in streams, but the available events 
+can vary depending on the specific stream implementation. Additionally, custom 
+streams can define and emit their own custom events to provide specific functionality 
+or to communicate with other parts of the application.
+
+When working with streams, it is important to listen for the appropriate events 
+and handle them accordingly to ensure proper flow control, error handling, and 
+resource management.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-Hoisting
+### 13.
+### What is piping in NodeJS?
+
+Piping in Node.js refers to the process of connecting the output of one stream 
+to the input of another stream, allowing data to flow seamlessly from the source 
+stream to the destination stream. It simplifies the handling of data between 
+streams and is a powerful mechanism for data transformation and flow control.
+
+The `pipe()` method is used to establish a pipe connection between two streams. 
+It is available on readable streams and takes a writable stream as its argument. 
+Once the pipe connection is established, data read from the readable stream is 
+automatically written to the writable stream.
+
+Here's an example that demonstrates how piping works in Node.js:
+```
+const fs = require('fs');
+
+// Create a readable stream from a source file
+const readableStream = fs.createReadStream('source.txt');
+
+// Create a writable stream to a destination file
+const writableStream = fs.createWriteStream('destination.txt');
+
+// Pipe the readable stream to the writable stream
+readableStream.pipe(writableStream);
+```
+
+In the example, a readable stream is created using `fs.createReadStream()` from 
+a source file, and a writable stream is created using `fs.createWriteStream()` 
+to a destination file. The `pipe()` method is then used to establish the pipe 
+connection between the two streams. Once the pipe is set up, data read from the 
+readable stream is automatically written to the writable stream until the readable 
+stream ends.
+
+Piping can be used with various types of streams, including file streams, 
+network streams, and custom streams. It allows for efficient data transfer and 
+processing without the need for explicit handling of chunks or data events.
+
+Piping can also be chained, enabling multiple streams to be connected together. 
+For example, the output of one transform stream can be piped to another transform 
+stream, creating a data transformation pipeline.
+
+```
+const fs = require('fs');
+const zlib = require('zlib');
+
+const readableStream = fs.createReadStream('source.txt');
+const gzipStream = zlib.createGzip();
+const writableStream = fs.createWriteStream('compressed.gz');
+
+readableStream.pipe(gzipStream).pipe(writableStream);
+```
+In the example above, data is read from a source file, piped through a `gzip` 
+transform stream for compression, and then piped to a writable stream that 
+writes the compressed data to a destination file.
+
+Piping simplifies the code and allows for modular and reusable stream components. 
+It also handles backpressure automatically, ensuring that data flows at an optimal 
+rate between streams.
+
+Overall, piping is a powerful feature in Node.js streams that enables seamless 
+data transfer and transformation between streams, making it a fundamental concept 
+in stream-based processing.
+
+
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-SQL normalization and denormalization
+### 14.
+### What is the purpose of `Buffer` class in NodeJS?
+
+In Node.js, the `Buffer` class is a built-in class that provides a way to handle 
+and manipulate binary data. It represents a fixed-size chunk of memory that can 
+store raw binary data in a variety of formats, such as strings, integers, 
+floating-point numbers, and more.
+
+The `Buffer` class is primarily used for the following purposes:
+
+1. `Binary Data Manipulation`: 
+  The `Buffer` class allows you to work with binary data directly. It provides 
+  methods for creating, reading, and modifying binary data, such as copying, 
+  slicing, and concatenating buffers. It also offers methods for converting 
+  binary data to various encodings, including `UTF-8`, `Base64`, and `hexadecimal`.
+
+2. `I/O Operations`: 
+  The Buffer class is commonly used for handling `I/O` operations, such as 
+  reading from or writing to files, sockets, or network streams. It enables 
+  efficient reading and writing of binary data in chunks, which is essential 
+  for high-performance `I/O` operations.
+
+3. `Data Transformations`: 
+  Buffers are often used in data transformations, such as encryption, compression, 
+  or encoding/decoding. They provide a convenient way to hold and manipulate 
+  the binary data during these transformations.
+
+4. `Interoperability`: 
+  The Buffer class allows seamless interaction with other APIs or modules that 
+  expect binary data. It provides a standardized way to pass and manipulate 
+  binary data between different parts of an application or between Node.js and 
+  external systems.
+
+Here's an example of creating a Buffer object and performing some basic operations:
+```
+// Creating a Buffer from a string
+const buffer = Buffer.from('Hello, World!', 'utf8');
+
+// Accessing buffer contents
+console.log(buffer.toString('utf8')); // Output: Hello, World!
+console.log(buffer.length); // Output: 13
+
+// Modifying buffer contents
+buffer.write('Modified', 0, 8, 'utf8');
+console.log(buffer.toString('utf8')); // Output: Modified, World!
+
+// Copying buffer
+const copyBuffer = Buffer.alloc(10);
+buffer.copy(copyBuffer, 0, 0, 10);
+console.log(copyBuffer.toString('utf8')); // Output: Modified,
+
+// Concatenating buffers
+const anotherBuffer = Buffer.from(', Again!', 'utf8');
+const concatenatedBuffer = Buffer.concat([buffer, anotherBuffer]);
+console.log(concatenatedBuffer.toString('utf8')); // Output: Modified, World!, Again!
+```
+In the example, a `Buffer` object is created from a string using `Buffer.from()`. 
+Various methods like `toString()`, `write()`, `copy()`, and `concat()` are used 
+to manipulate and work with the buffer.
+
+The `Buffer` class is a fundamental part of Node.js, providing a powerful 
+mechanism for handling binary data and enabling efficient I/O operations. 
+It plays a crucial role in scenarios involving networking, file operations, 
+encryption, and data transformations.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-SQL indexing
+### 15.
+### What's the difference between `readFile()` and `createReadStream()` in NodeJS?
+
+In Node.js,` readFile()` and `createReadStream()` are both used for reading 
+data from files, but they differ in their underlying mechanisms and their 
+suitability for different scenarios.
+
+Here are the key differences between `readFile()` and `createReadStream()`:
+
+`Read Operation`:
+
+1. `readFile()`: 
+  The `readFile()` function is a convenient method provided by the fs module in 
+  Node.js. It reads the entire contents of a file into memory as a `Buffer` or a 
+  string, depending on the specified encoding. It is suitable for small to 
+  moderate-sized files where you want to read the entire content into memory at once.
+
+2. `createReadStream()`: 
+  The `createReadStream()` function also belongs to the fs module, but it creates 
+  a readable stream to read data from a file. It allows you to read large files 
+  or process data in chunks, which is memory-efficient. It is particularly useful 
+  for handling large files or scenarios where you want to process data incrementally 
+  or asynchronously.
+
+`Memory Usage`:
+
+1. `readFile()`: 
+  `readFile()` loads the entire file contents into memory, which can consume 
+  significant memory resources, especially for large files. It is not suitable 
+  for handling extremely large files or scenarios where memory usage needs to 
+  be optimized.
+
+2. `createReadStream()`: 
+  `createReadStream()` reads the file in chunks, allowing for efficient memory 
+  utilization. It processes the data incrementally, avoiding the need to load 
+  the entire file into memory at once. It is more memory-friendly and performs 
+  well even with large files.
+
+`Event Handling`:
+
+1. `readFile()`: 
+  `readFile()` is a synchronous operation that blocks the execution until the 
+  entire file is read. It returns the file content as a Buffer or a string 
+  directly. It doesn't provide event-based handling or streaming capabilities.
+
+2. `createReadStream()`: 
+  `createReadStream()` returns a readable stream that emits events, such as the 
+  `'data' event` for each chunk of data and the `'end' event` when the entire 
+  file has been read. It allows you to handle events, perform actions on chunks 
+  of data, and control the flow of data.
+
+`Flexibility`:
+
+1. `readFile()`: 
+  `readFile()` provides a simple and straightforward way to read the entire 
+  content of a file. It is suitable for scenarios where you need the entire file 
+  content readily available in memory.
+
+2. `createReadStream()`: 
+  `createReadStream()` offers more flexibility and control. It allows you to 
+  process data incrementally, implement custom logic for handling events, and 
+  integrate with other streams or modules in a streaming pipeline.
+
+To summarize, `readFile()` is suitable for small to moderate-sized files or when 
+you need the entire file content in memory at once. On the other hand, 
+`createReadStream()` is more suitable for large files or scenarios where you want 
+to process data in chunks, optimize memory usage, or work with streams in a flexible 
+and event-driven manner.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-SQL Triggers
+### 16.
+### What are basic operational errors in NodeJS?
+
+In Node.js, like any other programming language, various operational errors can 
+occur during the execution of a program. These errors can be classified into 
+several categories. Here are some of the basic operational errors commonly 
+encountered in Node.js:
+
+1. `File System Errors`: 
+  Errors related to file system operations, such as reading or writing files, 
+  can occur due to various reasons. These errors include 
+    `"File not found,"` 
+    `"Permission denied,"` or 
+    `"Invalid file path."`
+
+2. `Network Errors`: 
+  Errors related to network operations can occur when working with network 
+  sockets, making `HTTP` requests, or establishing connections. These errors 
+  can be caused by network connectivity issues, DNS resolution failures, or 
+  server unavailability.
+
+3. `Database Errors`: 
+  When working with databases, errors can occur due to issues like connection 
+  problems, query syntax errors, or database server errors.
+
+4. `I/O Errors`: 
+  Input/Output errors can happen when reading or writing data to or from streams, 
+  files, or other I/O resources. These errors can occur due to file corruption, 
+  disk failure, or other I/O-related issues.
+
+5. `Runtime Errors`: 
+  Runtime errors encompass a wide range of issues that can occur during program 
+  execution, such as type errors, null reference errors, out-of-memory errors, 
+  and stack overflows.
+
+6. `System Errors`: 
+  System errors can occur due to issues at the operating system level, including 
+  resource limitations, memory allocation failures, or other system-related problems.
+
+7. `Security Errors`: 
+  Security-related errors can occur when performing operations that require certain 
+  permissions, credentials, or authentication. These errors can be due to invalid 
+  or expired tokens, unauthorized access attempts, or insecure configurations.
+
+When such operational errors occur, Node.js provides mechanisms to handle and 
+respond to these errors. This includes try-catch blocks for synchronous code, 
+error event listeners for asynchronous operations, and error callbacks or promises 
+for asynchronous functions.
+
+By properly handling these operational errors, developers can improve the reliability, 
+robustness, and error resilience of their Node.js applications.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-SQL Distinct and JOIN
+### 17.
+### What are callbacks? What is the first argument of a callback funciton?
+
+Callbacks are a fundamental concept in JavaScript and Node.js. They are functions 
+that are passed as arguments to other functions and are executed later, typically 
+when an asynchronous operation completes or when a certain event occurs.
+
+In the context of Node.js, callbacks are commonly used for asynchronous operations 
+like reading from a file, making network requests, or performing database queries. 
+Instead of blocking the execution and waiting for the operation to complete, 
+Node.js allows you to provide a callback function that will be called once the 
+operation finishes.
+
+The first argument of a callback function conventionally represents an `error` object 
+or `error` parameter. It allows the callback function to indicate whether an error 
+occurred during the execution of the asynchronous operation. If the operation was 
+successful, the `error` parameter is usually `null` or `undefined`.
+
+Here's an example that demonstrates the usage of a callback function with the 
+first argument as an error
+```
+function readFile(path, callback) {
+  // Simulating an asynchronous file read operation
+  setTimeout(function () {
+    // Simulated error
+    var error = null;
+    if (path === '') {
+      error = new Error('Invalid file path');
+    }
+
+    // Simulated file content
+    var content = 'File content';
+
+    // Invoke the callback with the error and content
+    callback(error, content);
+  }, 2000);
+}
+
+// Usage of the readFile function with a callback
+readFile('example.txt', function (error, content) {
+  if (error) {
+    console.error('Error:', error);
+  } else {
+    console.log('Content:', content);
+  }
+});
+```
+In the example, the `readFile()` function simulates an asynchronous file read 
+operation using `setTimeout()`. It checks if the file path is valid and creates 
+an error object if it is empty. The callback function is then invoked with the 
+error and content parameters.
+
+When invoking the `readFile()` function, a callback function is provided as the 
+second argument. In the callback function, the first argument is conventionally 
+named `error`. It allows the caller to handle potential errors by checking if the 
+`error` parameter is null or contains an `error` object. If an error occurred, it 
+can be handled accordingly.
+
+By convention, the first argument of a callback function in Node.js represents 
+an error. However, it's important to note that not all callback functions follow 
+this convention. Some callback functions may have different argument patterns 
+depending on the specific API or library being used. It's always recommended to 
+refer to the documentation or the API reference for the specific callback 
+function you are working with.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
+### 18
+### What is callback hell and how can it be fixed?
+
+`Callback hell`, also known as the `pyramid of doom`, is a situation that occurs 
+when dealing with multiple levels of nested callbacks in asynchronous `JavaScript` 
+code. It arises when there are multiple asynchronous operations that depend on 
+the results of previous operations, leading to deeply nested and hard-to-read code.
+
+Here's an example of callback hell:
+```
+asyncOperation1(function (error, result1) {
+  if (error) {
+    console.error('Error:', error);
+  } else {
+    asyncOperation2(function (error, result2) {
+      if (error) {
+        console.error('Error:', error);
+      } else {
+        asyncOperation3(function (error, result3) {
+          if (error) {
+            console.error('Error:', error);
+          } else {
+            // ... and so on
+          }
+        });
+      }
+    });
+  }
+});
+```
+
+As you can see, each callback is nested inside the previous callback, leading to 
+code that is difficult to read, understand, and maintain. It can quickly become 
+unwieldy and result in what is commonly known as `"callback hell"`.
+
+To mitigate or avoid callback hell, there are several techniques and patterns 
+that can be employed:
+
+1. `Modularization`: 
+  Break down the code into smaller, modular functions. Each function should have 
+  a clear responsibility and perform a specific asynchronous operation. This helps 
+  in organizing the code and reducing the level of nesting.
+
+2. `Use Named Functions`: 
+  Instead of using anonymous functions as callbacks, define named functions separately. 
+  This improves code readability and makes it easier to reason about the flow of execution.
+
+3. `Promises`: 
+  Promises provide a more structured and composable way to handle asynchronous operations. 
+  Promises allow you to chain operations using `then()` and handle errors with `catch()`, 
+  which results in code that is more readable and avoids excessive nesting. 
+  Promises also provide error propagation and centralized error handling.
+
+4. `Async/Await`: 
+  The `async` and `await` keywords introduced in `ECMAScript` 2017 provide a 
+  syntactical sugar on top of promises. They allow you to write asynchronous 
+  code in a synchronous-like manner, making it more readable and easier to follow.
+
+Here's an example of refactoring the previous `callback hell` code using promises:
+```
+asyncOperation1()
+  .then(result1 => asyncOperation2())
+  .then(result2 => asyncOperation3())
+  .then(result3 => {
+    // ... code after all async operations complete
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+```
+In this refactored code, promises are used to chain the asynchronous operations. 
+The `catch()` method is used to handle any errors that occur during the execution \
+of the promises.
+
+By utilizing `modularization`, `named functions`, `promises`, and `async/await`,
+ you can avoid or reduce the occurrence of `callback hell`, resulting in more 
+ readable and maintainable asynchronous code.
+
 
 **[ Back to Top ⬆ ](#table-of-contents)**
+
+### 19
+### What's the difference between NPM and NodeJS core modules?
+
+`NPM (Node Package Manager)` and Node.js core modules are both integral parts of 
+the Node.js ecosystem, but they serve different purposes.
+
+- `Node.js Core Modules`: 
+  `Node.js core modules` are built-in modules that come bundled with the Node.js 
+  runtime. These modules provide essential functionalities and are accessible 
+  without the need for additional installation or dependencies. Examples of 
+  Node.js core modules include `fs` (file system), `http` (HTTP server and client), 
+  `path` (file path manipulation), and `util` (utility functions). Core modules 
+  are part of the Node.js distribution and are maintained by the Node.js project.
+
+- `NPM (Node Package Manager)`: 
+  `NPM` is a package manager for Node.js, allowing developers to discover, 
+  install, and manage third-party packages and libraries. NPM provides a vast 
+  ecosystem of packages that extend the functionality of Node.js beyond the 
+  core modules. These packages can be found in the NPM registry (https://www.npmjs.com/) 
+  and cover a wide range of functionalities, such as web frameworks, database connectors, 
+  testing libraries, and more. NPM manages package dependencies and provides 
+  tools for version management, package publishing, and project management.
+
+Here are some key differences between Node.js core modules and NPM packages:
+
+- `Availability`: 
+  Node.js core modules are available by default in any Node.js installation. 
+  They are part of the Node.js runtime and can be used without any additional 
+  installation steps. On the other hand, NPM packages need to be explicitly 
+  installed using the NPM package manager. You can install packages globally to
+  make them accessible across different projects or locally within specific projects.
+
+- `Functionality`: 
+  Node.js core modules provide fundamental functionalities that are essential 
+  for building Node.js applications. They cover various areas such as file system 
+  operations, networking, cryptography, streams, and more. NPM packages, on the 
+  other hand, offer a vast array of additional functionalities and libraries 
+  developed by the Node.js community. These packages extend the capabilities of 
+  Node.js and provide solutions for specific use cases and domains.
+
+- `Maintenance`: 
+  Node.js core modules are maintained by the Node.js project itself and are 
+  typically more stable and reliable. They undergo rigorous testing and 
+  improvements as part of the Node.js development process. NPM packages, 
+  on the other hand, are maintained by individual package authors or organizations. 
+  The quality and maintenance of NPM packages can vary, so it's important to 
+  consider factors like popularity, community support, and package version 
+  history when choosing and using NPM packages.
+
+In summary, Node.js core modules are the built-in modules that provide essential 
+functionalities in the Node.js runtime, while NPM is the package manager that 
+allows developers to access a vast ecosystem of third-party packages to extend 
+Node.js with additional features and libraries.
+
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 20
+### What is `package.json` and `package-lock.json`?
+
+`package.json` and `package-lock.json` are both files used in Node.js projects 
+to manage dependencies and provide metadata about the project.
+
+- `package.json`: 
+  `package.json` is a file in the root directory of a Node.js project that serves 
+  as a manifest for the project. It contains important information about the 
+  project, including its name, version, description, entry point file, scripts, 
+  dependencies, and other metadata. It is typically created and maintained manually 
+  or through the use of tools like `npm init` or yarn init. The `package.json` 
+  file allows developers to define project-specific configurations, manage dependencies, 
+  and specify scripts for various tasks like building, testing, and running the application.
+
+- `package-lock.json`: 
+  `package-lock.json` is a file that is automatically generated by `NPM` (or `Yarn`) 
+  when installing packages in a Node.js project. It serves as a detailed record 
+  of the exact versions and dependencies installed for each package in the project. 
+  The purpose of `package-lock.json` is to provide deterministic and reproducible 
+  installations, ensuring that subsequent installations on different machines or 
+  environments result in the same set of dependencies. It locks the versions of 
+  installed packages and their transitive dependencies, preventing unwanted updates 
+  or inconsistencies between different installations. The `package-lock.json` file 
+  is particularly useful when working in a team or when deploying the project to 
+  different environments to ensure consistent and predictable installations.
+
+The `package.json` file is typically committed to version control systems (such as Git), 
+while the `package-lock.json` file is generated locally and is not intended to be 
+modified manually. When running commands like `npm` install or yarn install, 
+the package manager looks at the `package.json` file to determine the required 
+packages and versions. It then consults the `package-lock.json` file (if present) 
+to install the exact specified versions and dependencies, ensuring consistent 
+installations across different environments.
+
+Both `package.json` and `package-lock.json` play important roles in managing 
+dependencies, configuring projects, and ensuring consistent installations in 
+Node.js projects. They are crucial for package management, collaboration, and 
+project reproducibility.
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 21
+### What are exit codes in NodeJS?
+
+In Node.js, `exit codes` are numeric codes that indicate the status of a process 
+when it exits or terminates. When a Node.js script or application finishes running, 
+it returns an `exit code` to the operating system, indicating whether the process 
+completed successfully or encountered an error.
+
+`Exit codes` are useful for understanding the outcome of a program execution, 
+especially when it is invoked as part of a larger system or when running scripts 
+from the command line.
+
+Here are some common `exit codes` in Node.js:
+
+  - `0`: 
+    The process exited successfully without any errors. This is the conventional 
+    exit code for successful terminations.
+  - `1`: 
+    Indicates a generic error. It is often used when an unexpected error occurs, 
+    or when the program exits due to an unhandled exception.
+  - `2`: 
+    Indicates misuse of the command line interface or incorrect command-line 
+    arguments. It is commonly used when the program terminates due to invalid or 
+    missing options or parameters.
+  - `3`: 
+    Indicates a JavaScript runtime error. It is used when the program exits due 
+    to a JavaScript exception or a syntax error.
+  - `4`: 
+    Indicates a Node.js internal error. It is used when the program encounters 
+    an internal Node.js error or inconsistency.
+
+`Exit code`s other than the standard ones mentioned above can be used for specific 
+purposes depending on the application or the script's requirements. 
+Custom `exit codes` can be defined to convey specific meanings relevant to 
+the program's context.
+
+To access the exit code of a Node.js script or application, you can use the 
+`process.exitCode` property or the `process.exit()` method. The `process.exitCode` 
+property allows you to set the desired exit code, and the `process.exit()` method 
+terminates the Node.js process and returns the specified exit code to the operating system.
+
+For example, to exit a Node.js script with an exit code of `1` to indicate an error:
+```
+process.exitCode = 1;
+process.exit();
+```
+
+Exit codes provide a way to communicate the outcome of a Node.js process to the 
+operating system or to other components of a larger system. They help in 
+error handling, process monitoring, and automation workflows.
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 22
+### What's the difference between `setTimeout()` and `setInterval()`?
+
+Both `setTimeout()` and `setInterval()` are functions in `JavaScript` that allow 
+you to schedule the execution of a function at a later time. However, they differ 
+in how they handle the timing and repetition of the scheduled function.
+
+- `setTimeout()`: 
+  The `setTimeout()` function is used to schedule the execution of a function 
+  after a specified delay (in milliseconds). It executes the function once and 
+  then stops. The basic syntax of setTimeout() is:
+  `setTimeout(callback, delay, arg1, arg2, ...)`
+  `callback`: The function to be executed after the delay.
+  `delay`: The delay in milliseconds before executing the function.
+  `arg1, arg2, ...`: Optional arguments to be passed to the callback function.
+Example usage:
+```
+setTimeout(function() {
+  console.log('This message will be printed after 2 seconds.');
+}, 2000);
+```
+`setInterval()`: 
+  The `setInterval()` function is used to repeatedly execute a function at 
+  a specified interval. It executes the function repeatedly until it is cleared 
+  or the program is terminated. The basic syntax of `setInterval()` is:
+`setInterval(callback, delay, arg1, arg2, ...)`
+  `callback`: The function to be executed repeatedly.
+  `delay`: The interval in milliseconds between each execution of the function.
+  `arg1, arg2, ...`: Optional arguments to be passed to the callback function.
+Example usage:
+```
+setInterval(function() {
+  console.log('This message will be printed every 1 second.');
+}, 1000);
+```
+In summary, `setTimeout()` executes the specified function once after 
+a specified delay, while `setInterval()` executes the specified function 
+repeatedly at a specified interval until cleared. The choice between them 
+depends on whether you need a single delayed execution or repeated execution 
+at fixed intervals.
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 23
+### Explain HTTP.
+
+`HTTP (Hypertext Transfer Protocol)` is an application-layer protocol that 
+enables communication between clients and servers over the internet. It is the 
+foundation of data exchange on the World Wide Web and is used for retrieving and 
+transmitting resources such as HTML documents, images, videos, and other files.
+
+Key features and concepts of HTTP include:
+
+Client-Server Model: HTTP follows a client-server model where a client (such as a web browser) sends a request to a server, and the server responds with the requested resource or an error message. The client initiates the communication, and the server processes the request and provides a response.
+
+- `Stateless Protocol`: 
+  `HTTP` is stateless, meaning that each request is independent and does not 
+  retain any information about past requests. The server treats each request as 
+  a new one without any context from previous requests, unless additional mechanisms 
+  like cookies or sessions are used to maintain state.
+
+- `Request-Response Cycle`: 
+  An `HTTP` transaction consists of a request sent by the client to the server 
+  and a response returned by the server to the client. The request contains 
+  information such as the `HTTP` method (`GET`, `POST`, `PUT`, `DELETE`), `URL`, 
+  `headers`, and optional `request body`. The server processes the request and 
+  sends back a response containing a status code, headers, and the requested 
+  resource or an error message.
+
+- `URL (Uniform Resource Locator)`: 
+  `URLs` are used to identify and locate resources on the web. They specify the 
+  protocol (such as `HTTP`), the `domain name` or `IP address` of the server, 
+  and the path to the specific resource.
+
+- `Methods`: 
+  `HTTP` defines various methods (also known as verbs) that specify the intended 
+  action to be performed on a resource. Commonly used methods include:
+
+`GET`: 
+  Retrieves a resource from the server.
+`POST`: 
+  Submits data to the server to create a new resource.
+`PUT`: 
+  Updates an existing resource on the server.
+`DELETE`: 
+  Deletes a resource from the server.
+`Status Codes`: 
+  `HTTP` status codes are used to indicate the outcome of a request. They provide 
+  information about whether a request was successful, encountered an error, 
+  or requires further action. 
+  Examples of status codes include `200 (OK)`, `404 (Not Found)`, 
+  `500 (Internal Server Error)`, and many more.
+
+`Headers`: 
+  `HTTP` headers provide additional information about the request or the response. 
+  They can include details such as content type, content length, cache control, 
+  authentication, and more.
+
+`HTTP` forms the backbone of web communication, allowing clients (such as web browsers) 
+to interact with servers to request and retrieve web pages and other resources. 
+It provides a standardized protocol for communication, enabling interoperability 
+between various client and server implementations.
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 25
+### What are HTTP methods?
+
+`HTTP (Hypertext Transfer Protocol)` defines several methods, also known as `HTTP` 
+verbs or `HTTP request methods`, that specify the intended action to be performed 
+on a resource. These methods indicate the type of operation the client wants to 
+perform on the server. Here are some commonly used `HTTP` methods:
+
+- `GET`: 
+  The `GET` method is used to retrieve a representation of a resource from the 
+  server. It is a safe and **idempotent** method, meaning that it should not modify 
+  the server's state or have any side effects. It is commonly used for fetching 
+  web pages, images, or other data from the server.
+
+- `POST`: 
+  The `POST` method is used to submit data to the server to create a new resource. 
+  It sends data in the body of the request, which could be form data, JSON payload,
+   or any other content type. Unlike GET, POST is not idempotent, as multiple 
+   identical requests may result in different outcomes or side effects. It is 
+   commonly used for submitting forms, creating new records, or performing actions 
+   that change the server's state.
+
+- `PUT`: 
+  The `PUT` method is used to update an existing resource on the server. It replaces 
+  the entire representation of the resource with the data sent in the request body. 
+  It is **idempotent**, meaning that multiple identical requests have the same 
+  effect as a single request. PUT is commonly used for updating records or 
+  replacing the contents of a file.
+
+- `DELETE`: 
+  The `DELETE` method is used to delete a specified resource on the server. It 
+  requests the server to remove the resource identified by the `URL`. `DELETE` 
+  is **idempotent**, and multiple identical requests have the same effect as a 
+  single request. It is commonly used for deleting records, files, or any other 
+  server-side resources.
+
+- `PATCH`: 
+  The `PATCH` method is used to partially update an existing resource on the 
+  server. It applies modifications to the resource without replacing the entire 
+  representation. The request body contains only the changes to be applied. 
+  `PATCH` is **not necessarily idempotent**, as multiple identical requests may result 
+  in different outcomes. It is commonly used for making partial updates to resources.
+
+- `HEAD`: 
+  The `HEAD` method is similar to `GET`, but it retrieves only the response headers 
+  and not the response body. `HEAD` method is also ***idempotent***.
+  It is used to obtain metadata about 
+  a ***resource without transferring the actual content***. 
+  `HEAD` requests are often used for checking resource availability, caching, or 
+  obtaining information about the server.
+
+These are some of the commonly used `HTTP` methods, but there are additional 
+methods defined in the `HTTP` specification, such as `OPTIONS`, `TRACE`, and `CONNECT`, 
+which serve specific purposes in certain scenarios. When building web applications, 
+choosing the appropriate `HTTP` method for each operation helps ensure that the 
+application follows the principles of RESTful design and performs the desired 
+actions on the server-side resources.
+
+In the context of HTTP, an idempotent method is a method that can be applied 
+multiple times without producing different results. Regardless of the number of 
+times the same request is made, the state of the server should remain the same 
+after the request is processed. In other words, repeated identical requests should 
+have the same effect as a single request.
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 26
+### Caching strategies
+
+Cache strategies refer to various techniques and approaches used to manage and 
+optimize caching in web applications. Caching is the process of storing frequently 
+accessed data or resources in a cache to improve performance and reduce the need 
+for repeated expensive computations or network requests. Different cache strategies 
+can be employed based on the specific requirements and characteristics of the 
+application. Here are some common cache strategies:
+
+- `Expiration-Based Caching`: 
+  This strategy involves setting an expiration time or duration for cached data. 
+  The data remains in the cache until the expiration time is reached, at which 
+  point it is considered stale, and a fresh copy needs to be retrieved. This 
+  approach is useful for static or relatively stable data that does not change 
+  frequently.
+
+- `Validation-Based Caching`: 
+  Instead of relying solely on expiration time, this strategy validates whether 
+  the cached data is still valid by making conditional requests to the server. 
+  The server responds with a status code indicating whether the cached data is 
+  up-to-date or needs to be refreshed. This approach is suitable for data that 
+  may change occasionally and requires validation before being served.
+
+- `Least Recently Used (LRU) Caching`: 
+  `LRU` caching involves maintaining a limited-size cache and removing the least 
+  recently used items when the cache reaches its capacity. This strategy ensures 
+  that the most frequently accessed or recently used items remain in the cache, 
+  while less frequently used items are evicted. `LRU` caching is useful for 
+  scenarios where the cache size is limited, and the most popular items need to 
+  be retained.
+
+- `Write-Through Caching`: 
+  With write-through caching, data is written or updated in both the cache and 
+  the underlying data store simultaneously. This ensures that the cache and data 
+  store are always in sync. Read requests can be served from the cache directly, 
+  but write requests require both the cache and the data store to be updated. 
+  This strategy provides consistency but can introduce additional latency for write 
+  operations.
+
+- `Write-Back Caching`: 
+  `Write-back caching `involves initially writing or updating data in the cache 
+  and deferring the write to the underlying data store. This allows for faster 
+  write operations as the data is written to the cache only. The cache is responsible 
+  for periodically synchronizing the changes with the data store. Write-back caching 
+  can introduce the risk of data loss in case of cache failures before synchronization.
+
+- `Content Delivery Network (CDN) Caching`: 
+  `CDNs` are widely used for caching static content in distributed systems. 
+  `CDNs` cache content in geographically distributed edge servers, allowing users 
+  to access the content from a server closer to their location, reducing latency. 
+  `CDNs` use various cache strategies based on HTTP headers, file versioning, 
+  and time-to-live (TTL) settings.
+
+These are just a few examples of cache strategies. The choice of the cache strategy 
+depends on factors such as the nature of the data, frequency of updates,
+performance requirements, available infrastructure, and the specific needs of 
+the application. An effective cache strategy can significantly improve application 
+performance and reduce server load by serving frequently accessed data from 
+a cache instead of making repeated expensive computations or network requests.
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 27
+### JS closures
+
+`JavaScript closures` are a powerful feature that allows functions to retain 
+access to variables from their outer (enclosing) lexical scope, even after the 
+outer function has finished executing. In simpler terms, a closure is a function 
+bundled together with its surrounding state (lexical environment), including any 
+variables or functions that were in scope at the time of its creation.
+
+Closures are created when a nested function references variables from its outer 
+function. The inner function forms a closure over those variables, preserving 
+their values and allowing them to be accessed even when the outer function has 
+completed execution.
+
+Here's an example to illustrate `closures` in `JavaScript`:
+```
+function outerFunction() {
+  var outerVariable = 'I am from the outer function';
+
+  function innerFunction() {
+    console.log(outerVariable); // Accessing the outerVariable from the outer function
+  }
+
+  return innerFunction;
+}
+
+var closure = outerFunction(); // Assigning the returned innerFunction to a variable
+closure(); // Invoking the innerFunction
+
+// Output: "I am from the outer function"
+```
+
+In this example, `outerFunction` defines an innerFunction inside it. 
+The `innerFunction` references the outerVariable from its lexical scope 
+(the scope of outerFunction). Even after `outerFunction` has completed execution 
+and returned the `innerFunction`, the `innerFunction` still retains access to 
+`outerVariable` due to the closure.
+
+Closures are commonly used in `JavaScript` for various purposes, such as:
+
+- `Data Privacy`: 
+  Closures allow you to create private variables and functions that are not 
+  accessible from outside the enclosing function. This helps in encapsulating 
+  data and preventing unwanted access or modification.
+
+- `Preserving State`: 
+  Closures allow functions to remember and access the values of variables from 
+  the time of their creation. This is useful when dealing with asynchronous 
+  operations, event handlers, or callback functions that need access to the 
+  original context or state.
+
+- `Function Factories`: 
+  Closures enable the creation of function factories, where a function generates 
+  and returns a new function with predefined behavior based on the captured variables.
+
+Closures are a fundamental concept in JavaScript and play a crucial role in 
+enabling powerful programming techniques like currying, memoization, and module 
+patterns. Understanding closures and their behavior is important for writing clean, 
+modular, and efficient JavaScript code.
+
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 28
+### JS iterator
+
+In `JavaScript`, iterators are objects that provide a standardized way to iterate 
+over a sequence of values or elements. They define a common interface for traversing 
+data structures such as arrays, strings, maps, sets, and custom objects. 
+***Iterators allow you to loop over elements and access them one by one,***
+***providing a more controlled and efficient way to process or consume data.***
+
+The core concept behind iterators is the separation of concerns between the data 
+structure and the iteration logic. The data structure itself does not need to 
+know how to iterate over its elements; instead, it exposes an iterator object 
+that knows how to traverse the structure.
+
+To work with iterators, two main components are involved:
+
+- `Iterable`: 
+  An `iterable` is an object that provides an `iterator`. It has a special method 
+  called `Symbol.iterator` that returns the iterator object. This method is 
+  typically implemented as a `generator function`, which generates the next value 
+  in the sequence.
+
+- `Iterator`: 
+  An `iterator` is an object that represents the iteration state. It implements 
+  a `next()` method that returns the next value in the sequence along with a done 
+  property indicating if there are more values available. The `next()` method is 
+  called repeatedly to iterate over the elements.
+
+Here's an example that demonstrates the use of iterators with an array:
+```
+const iterable = [1, 2, 3, 4, 5];
+
+const iterator = iterable[Symbol.iterator]();
+
+console.log(iterator.next()); // { value: 1, done: false }
+console.log(iterator.next()); // { value: 2, done: false }
+console.log(iterator.next()); // { value: 3, done: false }
+console.log(iterator.next()); // { value: 4, done: false }
+console.log(iterator.next()); // { value: 5, done: false }
+console.log(iterator.next()); // { value: undefined, done: true }
+```
+In this example, the array iterable is an iterable object because it provides 
+the `Symbol.iterator` method. Calling `iterable[Symbol.iterator]()` returns the 
+iterator object. Each call to the iterator's `next()` method returns the next 
+element in the array until all elements are exhausted (done becomes true).
+
+`JavaScript` provides built-in support for iteration using the `for...of` loop, 
+which automatically handles the iteration process using iterators:
+```
+const iterable = [1, 2, 3, 4, 5];
+
+for (const element of iterable) {
+  console.log(element);
+}
+```
+Iterators are not limited to arrays; they can be implemented for any custom data 
+structure. By adhering to the iterator protocol, you can define your own iterable 
+objects and use them in `for...of` loops or with other iterator-consuming functions 
+like `Array.from()` or the ***spread operator*** `(...)`.
+
+Iterators provide a flexible and standardized mechanism for traversing data structures, 
+allowing you to process data one element at a time without loading the entire collection 
+into memory. They are an essential part of JavaScript's iterable and iterator protocol, 
+enabling convenient and efficient iteration over various types of data.
+
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 29
+### High order functions
+
+`High-order functions` are functions in `JavaScript` that can accept other functions 
+as arguments and/or return functions as their results. They treat functions as 
+first-class citizens, treating them just like any other data type such as strings 
+or numbers.
+
+Here are a few key characteristics of `high-order` functions:
+
+- `Accepting Functions as Arguments`: 
+  `High-order functions` can take one or more functions as arguments. These 
+  functions are typically referred to as callback functions. The high-order 
+  function can then invoke the callback function at a certain point or pass
+  data to it for further processing.
+
+- `Returning Functions`: 
+  `High-order functions` **can generate and return new functions**. 
+  These returned functions can be stored in variables, passed as arguments to 
+  other functions, or invoked later in the code.
+
+- `Enhancing Functionality`: 
+  By accepting or returning functions, `high-order functions` provide a way to 
+  enhance or modify the behavior of functions dynamically. They allow for code 
+  reuse and abstraction by encapsulating common patterns or operations.
+
+Here's an example to illustrate `high-order functions`:
+```
+function withLogging(func) {
+  return function (...args) {
+    console.log('Calling function:', func.name);
+    const result = func(...args);
+    console.log('Function result:', result);
+    return result;
+  };
+}
+
+function add(a, b) {
+  return a + b;
+}
+
+const loggedAdd = withLogging(add);
+console.log(loggedAdd(2, 3));
+
+// Output:
+// Calling function: add
+// Function result: 5
+// 5
+```
+In this example, `withLogging()` is a `high-order function` that accepts a function 
+`(func)` as an argument. It returns a new function that logs the name of the original 
+function before invoking it and also logs the result. The returned function (`loggedAdd`) 
+is then invoked with arguments 2 and 3, and the result is logged.
+
+`High-order functions` are widely used in JavaScript and have many practical 
+applications, including:
+
+- `Callbacks and Asynchronous Programming`: 
+  `High-order functions` enable handling asynchronous operations using callbacks 
+  or handling events with event listeners.
+
+- `Functional Programming`: 
+  `High-order functions` are a fundamental building block in functional programming 
+  paradigms. They enable composition, currying, and other functional programming 
+  techniques.
+
+- `Iterators and Higher-Order Array Methods`: 
+  `JavaScript`'s built-in array methods such as `map`, `filter`, `reduce`, and 
+  `forEach` are `high-order functions`. They accept functions as arguments and 
+  perform operations on array elements.
+
+By leveraging `high-order functions`, developers can write more flexible and 
+reusable code, enhance code readability, and achieve greater abstraction and 
+composability.
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 30
+### Hoisting
+
+`Hoisting` is a `JavaScript` behavior where variable and function declarations 
+are moved to the top of their containing scope during the compilation phase, 
+before the code is executed. This means that regardless of where variables and 
+functions are declared in the code, they are effectively "hoisted" to the top of 
+their scope.
+
+However, it's important to note that `hoisting` does not physically move the code 
+to the top; rather, it's a concept that describes how JavaScript internally 
+processes variable and function declarations.
+
+There are two main aspects of hoisting:
+
+- `Variable Hoisting`: 
+  When variables are hoisted, the variable declarations are moved to the top of 
+  their scope, but not the initializations. This means that you can access variables 
+  before they are formally declared in the code. However, the variables will have 
+  the value undefined until the initialization is encountered in the code.
+
+Here's an example of variable `hoisting`:
+```
+console.log(message); // Output: undefined
+var message = 'Hello, hoisting!';
+console.log(message); // Output: Hello, hoisting!
+```
+In the example, the variable message is accessed before it is declared. 
+During `hoisting`, the variable declaration is moved to the top, but the 
+initialization happens at the original location. Hence, the first `console.log()` 
+outputs undefined, and the second one outputs the assigned value.
+
+- `Function Hoisting`: 
+  Function declarations are also hoisted to the top of their containing scope.
+  This means that you can call a function before its declaration in the code.
+
+Here's an example of function `hoisting`:
+```
+greet(); // Output: Hello, hoisting!
+
+function greet() {
+  console.log('Hello, hoisting!');
+}
+```
+In this example, the `greet()` function is called before its declaration. 
+During `hoisting`, the function declaration is moved to the top, allowing it to 
+be invoked at any point in the code.
+
+It's worth noting that `hoisting` applies to function declarations 
+(`function functionName() {}`) and variable declarations (`var`, `let`, and `const`), 
+but not to variable assignments or function expressions (`var functionName = function() {}`).
+
+To avoid confusion and ensure code clarity, it is considered good practice to declare 
+variables and functions at the beginning of their scope, rather than relying on 
+hoisting. This improves code readability and avoids potential bugs caused by implicit 
+hoisting behavior.
+
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 31
+### SQL normalization and denormalization
+
+**SQL normalization and denormalization** are techniques used in database design 
+to organize and structure data efficiently and maintain data integrity. 
+Let's explore each of these concepts:
+
+- `Normalization`:
+  `Normalization` is the process of breaking down a database schema into multiple 
+  smaller, well-structured tables to eliminate redundancy and dependency issues. 
+  It follows a set of rules, known as normal forms, which define how data should 
+  be organized.
+
+The primary goals of normalization are:
+
+- `Eliminating Data Redundancy`: 
+  Redundancy refers to the repetition of data in multiple places, which can lead 
+  to inconsistencies and increase storage space. Normalization helps eliminate 
+  redundant data by dividing it into separate tables.
+- `Maintaining Data Integrity`: 
+  Normalization ensures that data integrity is preserved by minimizing anomalies 
+  such as update, insertion, and deletion anomalies. It helps maintain consistency, 
+  accuracy, and reliability of data.
+`Normalization` is typically achieved by applying a series of normal forms, including:
+
+- `First Normal Form (1NF)`: 
+  Ensures atomicity of data by organizing attributes into separate columns 
+  within a table, avoiding repeating groups.
+- `Second Normal Form (2NF)`: 
+  Requires meeting `1NF` and eliminating partial dependencies by identifying and 
+  separating attributes dependent on only part of a composite primary key.
+- `Third Normal Form (3NF)`: 
+  Requires meeting `2NF` and eliminating transitive dependencies by removing 
+  attributes that are dependent on non-key attributes.
+There are additional normal forms, such as `Boyce-Codd Normal Form (BCNF)` and 
+`Fourth Normal Form (4NF)`, that address more complex dependencies. Normalization
+ helps improve data integrity, reduce redundancy, and simplify data management.
+
+- `Denormalization`:
+  `Denormalization` is the opposite of normalization. It involves intentionally 
+  introducing redundancy into the database schema to optimize query performance 
+  by reducing the number of joins or simplifying data retrieval. `Denormalization` 
+  trades off redundancy for improved read performance.
+
+`Denormalization` techniques include:
+
+- `Data Duplication`: 
+  Replicating data across tables to eliminate joins and speed up query execution.
+- `Derived Columns`: 
+  Calculating and storing derived or computed values as additional columns to 
+  avoid complex calculations during queries.
+- `Aggregates`: 
+  Precomputing and storing aggregate values (e.g., sums, averages) to avoid 
+  recalculating them repeatedly. Denormalization is commonly used in scenarios 
+  where read performance is critical, such as data warehousing or reporting s
+  ystems. However, it should be used judiciously to balance the trade-offs 
+  between query performance and data consistency.
+
+In summary, `normalization` and `denormalization` are complementary techniques 
+used in database design. Normalization optimizes data organization, eliminates 
+redundancy, and maintains data integrity, while denormalization optimizes read 
+performance by introducing controlled redundancy. The choice between these 
+techniques depends on the specific requirements of the application, balancing 
+factors such as data consistency, query performance, and scalability.
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 32
+### SQL injection
+
+`SQL injection` is a type of security vulnerability that occurs when untrusted 
+user input is inserted into `SQL` queries without proper validation or sanitization. 
+It allows an attacker to manipulate the structure or execution of `SQL` statements, 
+potentially gaining unauthorized access to the database, retrieving sensitive 
+information, modifying data, or performing other malicious actions.
+
+Here's a basic explanation of how `SQL injection` works:
+
+- `User Input`: 
+  A web application accepts user input, such as form fields or `URL` parameters,
+   that are used to construct `SQL` queries.
+
+- `Malicious Input`: 
+  An attacker submits malicious input containing `SQL` code or special characters 
+  that can alter the intended behavior of the query. This input may include `SQL` keywords, 
+  additional `SQL` statements, or data that can manipulate the query structure.
+
+- `Concatenation Vulnerability`: 
+  The web application naively concatenates the user input directly into the `SQL` 
+  query string without proper validation, escaping, or parameterization. This 
+  allows the injected `SQL` code to be executed as part of the query.
+
+- `Exploitation`: 
+  The manipulated `SQL` code executes within the context of the application's database, 
+  potentially bypassing security measures and performing unintended actions. 
+  The attacker can retrieve sensitive data, modify the database, execute arbitrary 
+  commands, or even gain control of the underlying server.
+
+Here's a simplified example of a vulnerable PHP code snippet:
+```
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+$sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+$result = mysqli_query($conn, $sql);
+```
+In this example, the code directly concatenates the user input `($username and $password)` 
+into the `SQL` query, making it susceptible to `SQL` injection. An attacker can 
+submit malicious input such as `'`, `OR`, `'1'='1'` -- as the `username` or `password`, 
+which can manipulate the query to always evaluate to true and potentially bypass 
+authentication.
+
+Preventing SQL injection involves implementing proper security measures, such as:
+
+- `Parameterized Queries`: 
+  Using prepared statements or parameterized queries with placeholders, where user 
+  input is treated as separate parameters rather than directly embedded in the query. 
+  This ensures that the query and data are kept separate, preventing injection attacks.
+
+- `Input Validation and Sanitization`: 
+  Applying strict input validation and sanitization to user input, ensuring that 
+  it adheres to the expected format and removing or escaping any potentially 
+  harmful characters.
+
+- `Least Privilege`: 
+  Restricting the privileges and permissions of the database user accounts used 
+  by the application to minimize the potential impact of an SQL injection attack.
+
+- `Avoid Dynamic Query Construction`: 
+  Avoiding the practice of dynamically constructing `SQL` queries by concatenating 
+  user input, as it leaves room for vulnerabilities. Instead, consider using an 
+  `ORM (Object-Relational Mapping)` or query builder library that handles query 
+  construction safely.
+
+- `Security Audits and Penetration Testing`: 
+  Regularly conducting security audits and penetration testing to identify and 
+  address any potential vulnerabilities, including `SQL injection` vulnerabilities.
+
+By following secure coding practices and implementing proper safeguards, 
+developers can prevent `SQL injection` attacks and ensure the security and 
+integrity of their applications and databases.
+
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 33
+### SQL indexing
+
+`SQL indexing` is a technique used to improve the performance and efficiency of 
+database queries by creating special data structures called indexes. Indexes 
+provide a way to quickly locate and retrieve data based on the values in one or 
+more columns, rather than scanning the entire table.
+
+An index in a database is similar to an index in a book. It allows for faster 
+data retrieval by providing a reference to the location of specific data. Without 
+indexes, database systems would need to scan every row in a table to find the 
+desired data, which can be slow and resource-intensive, especially for large datasets.
+
+Here are some key points about `SQL indexing`:
+
+- `Index Structure`: 
+  An index is a separate data structure that stores a subset of the columns from 
+  a table along with a pointer to the actual row in the table that contains the data. 
+  The index is organized in a way that allows for efficient lookup and retrieval 
+  of data based on the indexed columns.
+
+There are different types of indexes that can be used in SQL databases, including:
+
+- `B-tree Index`: 
+  The most common type of index, suitable for a wide range of queries and data types.
+- `Hash Index`: 
+  Suitable for exact match lookups but not effective for range queries.
+- `Bitmap Index`: 
+  Particularly useful for columns with a low number of distinct values, such as 
+  gender or status flags.
+- `Full-Text Index`: 
+  Designed for efficient text-based searching.
+- `Column Selection`: 
+  Indexes can be created on one or more columns of a table. The columns selected 
+  for indexing should be based on the query patterns and the columns frequently 
+  used in search conditions or joins.
+
+`Trade-Offs`: 
+  While indexes can significantly improve query performance, they also introduce 
+  some trade-offs. Indexes require additional storage space, and any modifications 
+  (inserts, updates, deletes) to the indexed columns incur additional overhead 
+  as the indexes need to be updated. Therefore, creating indexes should be done 
+  judiciously to strike a balance between query performance and the overhead of 
+  maintaining the indexes.
+
+`Index Optimization`: 
+Properly designing and optimizing indexes is essential to achieve optimal query 
+performance. This involves considering the table schema, analyzing query patterns, 
+and understanding the database system's capabilities and limitations.
+
+`Database Optimizer`:  
+The database optimizer is responsible for determining the most efficient query 
+execution plan, which may involve utilizing indexes. It analyzes the query, table 
+statistics, and available indexes to decide how to access the data in the most 
+efficient manner.
+
+Creating indexes on frequently queried columns can significantly improve the 
+speed of `SELECT` statements and enhance overall database performance. However, 
+it's important to carefully evaluate the indexing strategy, considering the 
+specific workload and data characteristics, to avoid unnecessary or inefficient indexes.
+
+Regular monitoring and maintenance of indexes are also important to ensure optimal 
+performance over time. This includes monitoring query performance, identifying 
+missing or unused indexes, and making adjustments as needed.
+
+In summary, `SQL indexing` is a technique used to enhance database query performance 
+by creating data structures that allow for efficient data retrieval. Properly 
+designed and maintained indexes can significantly speed up query execution and 
+improve overall database performance.
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 35
+### SQL Trigger
+
+In SQL, a trigger is a special type of stored procedure that is automatically 
+executed in response to specific events or actions performed on a table, such as 
+`INSERT`, `UPDATE`, or `DELETE` operations. Triggers are used to enforce business 
+rules, maintain data integrity, and automate certain actions within the database.
+
+Here's the basic syntax for creating a trigger in `SQL`:
+```
+CREATE TRIGGER trigger_name
+{BEFORE | AFTER} {INSERT | UPDATE | DELETE} ON table_name
+[FOR EACH ROW]
+[WHEN (condition)]
+BEGIN
+    -- Trigger body: SQL statements and logic
+END;
+```
+Let's break down the components of a trigger:
+
+`trigger_name`: This is the name assigned to the trigger.
+
+`BEFORE/AFTER`: Specifies whether the trigger should execute before or after the 
+triggering event. BEFORE triggers are typically used for validation or modifying 
+values before the event occurs, while AFTER triggers are used for auditing or 
+performing actions after the event.
+
+`INSERT/UPDATE/DELETE`: Specifies the type of event that will trigger the execution 
+of the trigger. It can be one or a combination of these events.
+
+`table_name`: The name of the table on which the trigger is defined.
+
+`FOR EACH ROW`: This clause indicates that the trigger will be executed `for each row` a
+ffected by the triggering event. It is used when you want the trigger to operate on 
+individual rows.
+
+`WHEN (condition)`: An optional clause that specifies a condition that must be 
+satisfied for the trigger to execute. It can be used to add additional filtering 
+or conditions for the trigger.
+
+`BEGIN/END`: This block contains the body of the trigger, which consists of SQL 
+statements and logic executed when the trigger is invoked.
+
+Here's a simple example of an `AFTER INSERT` trigger that updates a related 
+table when a new row is inserted into a specific table:
+```
+CREATE TRIGGER after_insert_trigger
+AFTER INSERT ON employees
+FOR EACH ROW
+BEGIN
+    -- Update the department's employee count
+    UPDATE departments
+    SET employee_count = employee_count + 1
+    WHERE id = NEW.department_id;
+END;
+```
+In this example, whenever a new row is inserted into the employees table, the 
+trigger `after_insert_trigger` is fired. The trigger updates the `employee_count` 
+column of the corresponding department in the departments table.
+
+Triggers are powerful tools in SQL databases, but they should be used with caution.
+It's important to consider the performance impact of triggers, ensure they are 
+designed to handle potential errors or exceptions, and thoroughly test their 
+behavior with different scenarios.
+
+Additionally, different database systems may have variations in the syntax and 
+capabilities of triggers, so it's recommended to consult the documentation specific 
+to your database system for detailed information on working with triggers.
+
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 36
+### SQL Distinct and JOIN
+
+`SQL` `DISTINCT` and `JOIN` are two different concepts that serve distinct purposes 
+in working with relational databases:
+
+`DISTINCT`: 
+The `DISTINCT` keyword is used in `SQL` queries to eliminate duplicate rows from 
+the result set. It considers all columns selected in the SELECT statement and 
+returns only the unique combinations of values across those columns.
+
+For example, consider a table named `"customers"` with columns `"customer_id"` and `"country"`:
+`SELECT DISTINCT country FROM customers;`
+
+This query will return a list of unique countries from the `"customers"` table, 
+removing any duplicate country values.
+
+`JOIN`: 
+  `JOIN` is used to combine rows from two or more tables based on a related 
+  column between them. It allows you to retrieve data from multiple tables by 
+  specifying the relationship or join condition between them.
+
+For example, consider two tables: `"orders"` and `"customers"` with a common column 
+`"customer_id"`. To retrieve order details along with the corresponding customer 
+information, you can use a `JOIN`:
+```
+SELECT orders.order_id, orders.order_date, customers.customer_name
+FROM orders
+JOIN customers ON orders.customer_id = customers.customer_id;
+```
+This query joins the `"orders"` table with the `"customers"` table based on the matching 
+`"customer_id"` columns. It retrieves the `order ID`, `order date,` and `customer name` 
+for each order.
+
+In summary, `DISTINCT` is used to eliminate duplicate rows from the result set, 
+while `JOIN` is used to combine data from multiple tables based on a related column. 
+`DISTINCT` focuses on the uniqueness of rows, while `JOIN` focuses on the relationships 
+between tables. They serve different purposes and can be used together or independently 
+depending on the requirements of your `SQL` query.
+
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 37
+### Continuous Integration (CI) and Continuous Delivery (CD)
+
+`CI` and `CD` are two related practices in software development that aim to automate 
+and streamline the process of building, testing, and deploying software applications. 
+Let's break down each concept:
+
+`Continuous Integration (CI)`:
+`Continuous Integration` is a development practice where developers frequently 
+integrate their code changes into a shared repository. The main goal of CI is 
+to catch integration issues early by merging code changes frequently and 
+automating the build and testing processes.
+
+Key aspects of CI include:
+
+- `Version Control`: 
+  Developers use a version control system (e.g., Git) to manage and track changes to the codebase.
+
+- `Automated Build`: 
+  `CI` systems automatically build the software application whenever new code 
+  changes are committed to the repository. This ensures that the latest code is 
+  compiled and ready for testing.
+
+- `Automated Testing`: 
+  `CI` systems execute automated tests (e.g., `unit tests`, `integration tests`) 
+  against the built application to detect any issues or regressions introduced 
+  by the latest code changes.
+
+- `Early Feedback`: 
+  `CI` provides fast feedback to developers by notifying them of build or test 
+  failures, allowing them to quickly identify and fix integration issues.
+
+By practicing continuous integration, development teams can catch integration 
+problems early, maintain a more stable codebase, and collaborate more effectively.
+
+- `Continuous Delivery (CD)`:
+`Continuous Delivery` extends the concept of continuous integration by automating 
+the release and deployment processes. It focuses on making software always deployable 
+to any environment by keeping the codebase in a releasable state.
+
+Key aspects of `CD` include:
+
+- `Automated Deployment`: 
+  `CD` systems automate the deployment of built and tested software to various 
+  environments, such as staging or production, using deployment pipelines.
+
+- `Deployment Pipelines`: 
+  A deployment pipeline consists of a series of stages, such as build, test, 
+  deploy, and release. Each stage has predefined actions, and the software 
+  progresses through the pipeline automatically, undergoing necessary checks 
+  and validations at each stage.
+
+- `Infrastructure as Code`: 
+  `CD` often involves using `infrastructure as code` (`IaC`) techniques to define 
+  and manage the infrastructure components (e.g., servers, databases) required 
+  for deploying the application. Tools like Docker and configuration management 
+  systems help automate the provisioning and configuration of the infrastructure.
+
+- `Release Management`: 
+  `CD` aims to have a release process that is repeatable and can be triggered 
+  at any time. This allows for frequent, low-risk releases, reducing the time 
+  and effort required to ship new features or bug fixes.
+
+By embracing continuous delivery, teams can ensure that their software is always 
+in a deployable state, ready for release at any time. It helps reduce the time 
+between code changes and delivering value to users, promoting faster feedback 
+loops and enabling more efficient and reliable software delivery.
+
+It's important to note that `Continuous Integration` and `Continuous Delivery` 
+are closely related and often used together, but they represent different stages 
+of the software development and release lifecycle. Continuous Integration focuses 
+on integrating and testing code changes, while Continuous Delivery extends the 
+process to automate the release and deployment aspects.
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+**[ Back to Top ⬆ ](#table-of-contents)**
+**[ Back to Top ⬆ ](#table-of-contents)**
+**[ Back to Top ⬆ ](#table-of-contents)**
+**[ Back to Top ⬆ ](#table-of-contents)**
+**[ Back to Top ⬆ ](#table-of-contents)**
+**[ Back to Top ⬆ ](#table-of-contents)**
+**[ Back to Top ⬆ ](#table-of-contents)**
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+
+
