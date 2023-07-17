@@ -1,134 +1,185 @@
 # Table of contents
 
-- [Table of contents](#table-of-contents)
-    - [1.](#1)
-    - [What is `libuv`?](#what-is-libuv)
-    - [2.](#2)
-    - [What are threads in NodeJS?](#what-are-threads-in-nodejs)
-    - [3.](#3)
-    - [What are processes in nodejs?](#what-are-processes-in-nodejs)
-    - [4.](#4)
-    - [What is nodejs `child_process`?](#what-is-nodejs-child_process)
-    - [5.](#5)
-    - [How are errors handled in asynchronous code?](#how-are-errors-handled-in-asynchronous-code)
-    - [6.](#6)
-    - [What is `process.nextTick()` used for?](#what-is-processnexttick-used-for)
-    - [7.](#7)
-    - [What is `event-driven` programming?](#what-is-event-driven-programming)
-    - [8.](#8)
-    - [What is `EventEmitter` in NodeJS?](#what-is-eventemitter-in-nodejs)
-    - [9.](#9)
-    - [Does NodeJS support multi-core computing? How to utilize more than one CPU core?](#does-nodejs-support-multi-core-computing-how-to-utilize-more-than-one-cpu-core)
-    - [10.](#10)
-    - [Describe what a stream is in NodeJS.](#describe-what-a-stream-is-in-nodejs)
-    - [11.](#11)
-    - [How many types of streams exist in NodeJS?](#how-many-types-of-streams-exist-in-nodejs)
-    - [12.](#12)
-    - [What kind of events can be fired by a stream?](#what-kind-of-events-can-be-fired-by-a-stream)
-    - [13.](#13)
-    - [What is piping in NodeJS?](#what-is-piping-in-nodejs)
-    - [14.](#14)
-    - [What is the purpose of `Buffer` class in NodeJS?](#what-is-the-purpose-of-buffer-class-in-nodejs)
-    - [15.](#15)
-    - [What's the difference between `readFile()` and `createReadStream()` in NodeJS?](#whats-the-difference-between-readfile-and-createreadstream-in-nodejs)
-    - [16.](#16)
-    - [What are basic operational errors in NodeJS?](#what-are-basic-operational-errors-in-nodejs)
-    - [17.](#17)
-    - [What are callbacks? What is the first argument of a callback funciton?](#what-are-callbacks-what-is-the-first-argument-of-a-callback-funciton)
-    - [18](#18)
-    - [What is callback hell and how can it be fixed?](#what-is-callback-hell-and-how-can-it-be-fixed)
-    - [19](#19)
-    - [What's the difference between NPM and NodeJS core modules?](#whats-the-difference-between-npm-and-nodejs-core-modules)
-    - [20](#20)
-    - [What is `package.json` and `package-lock.json`?](#what-is-packagejson-and-package-lockjson)
-    - [21](#21)
-    - [What are exit codes in NodeJS?](#what-are-exit-codes-in-nodejs)
-    - [22](#22)
-    - [What's the difference between `setTimeout()` and `setInterval()`?](#whats-the-difference-between-settimeout-and-setinterval)
-    - [23](#23)
-    - [Explain HTTP.](#explain-http)
-    - [25](#25)
-    - [What are HTTP methods?](#what-are-http-methods)
-    - [26](#26)
-    - [Caching strategies](#caching-strategies)
-    - [27](#27)
-    - [JS closures](#js-closures)
-    - [28](#28)
-    - [JS iterator](#js-iterator)
-    - [29](#29)
-    - [High order functions](#high-order-functions)
-    - [30](#30)
-    - [Hoisting](#hoisting)
-    - [31](#31)
-    - [SQL normalization and denormalization](#sql-normalization-and-denormalization)
-    - [32](#32)
-    - [SQL injection](#sql-injection)
-    - [33](#33)
-    - [SQL indexing](#sql-indexing)
-    - [35](#35)
-    - [SQL Trigger](#sql-trigger)
-    - [36](#36)
-    - [SQL Distinct and JOIN](#sql-distinct-and-join)
-    - [37](#37)
-    - [Continuous Integration (CI) and Continuous Delivery (CD)](#continuous-integration-ci-and-continuous-delivery-cd)
-    - [39](#39)
-    - [What is session?](#what-is-session)
-    - [40](#40)
-    - [What is sticky session?](#what-is-sticky-session)
-    - [41](#41)
-    - [What are cookies?](#what-are-cookies)
-    - [42](#42)
-    - [What is JWT?](#what-is-jwt)
-    - [43](#43)
-    - [what's the difference between cookie and jwt?](#whats-the-difference-between-cookie-and-jwt)
-    - [44](#44)
-    - [what is message queue?](#what-is-message-queue)
-    - [45](#45)
-    - [RabbitMQ](#rabbitmq)
-    - [46](#46)
-    - [](#)
-    - [47](#47)
-    - [](#-1)
-    - [48](#48)
-    - [](#-2)
-    - [49](#49)
-    - [](#-3)
-    - [50](#50)
-    - [](#-4)
-    - [](#-5)
-    - [](#-6)
-    - [](#-7)
-    - [](#-8)
-    - [](#-9)
-    - [](#-10)
-    - [](#-11)
-    - [](#-12)
-    - [](#-13)
-    - [](#-14)
-    - [](#-15)
-    - [](#-16)
-    - [](#-17)
-    - [](#-18)
-    - [](#-19)
-    - [](#-20)
-    - [](#-21)
-    - [](#-22)
-    - [](#-23)
-    - [](#-24)
-    - [](#-25)
-    - [](#-26)
-    - [](#-27)
-    - [](#-28)
-    - [](#-29)
-    - [](#-30)
-    - [](#-31)
-    - [](#-32)
-    - [](#-33)
-    - [](#-34)
-    - [](#-35)
-    - [](#-36)
+- [1](#1)
+- [What is `event-driven` programming?](#what-is-event-driven-programming)
+- [2](#2)
+- [What is `libuv`?](#what-is-libuv)
+- [3](#3)
+- [What are microtasks and macrotasks?](#what-are-microtasks-and-macrotasks)
+- [4](#4)
+- [What are threads in NodeJS?](#what-are-threads-in-nodejs)
+- [5](#5)
+- [What are processes in nodejs?](#what-are-processes-in-nodejs)
+- [6](#6)
+- [What is nodejs `child_process`?](#what-is-nodejs-child_process)
+- [7](#7)
+- [Does NodeJS support multi-core computing? How to utilize more than one CPU core?](#does-nodejs-support-multi-core-computing-how-to-utilize-more-than-one-cpu-core)
+- [8](#8)
+- [How are errors handled in asynchronous code?](#how-are-errors-handled-in-asynchronous-code)
+- [9](#9)
+- [What is `process.nextTick()` used for?](#what-is-processnexttick-used-for)
+- [10](#10)
+- [What is `EventEmitter` in NodeJS?](#what-is-eventemitter-in-nodejs)
+- [11](#11)
+- [Describe what a stream is in NodeJS.](#describe-what-a-stream-is-in-nodejs)
+- [12](#12)
+- [How many types of streams exist in NodeJS?](#how-many-types-of-streams-exist-in-nodejs)
+- [13](#13)
+- [What kind of events can be fired by a stream?](#what-kind-of-events-can-be-fired-by-a-stream)
+- [14](#14)
+- [What is piping in NodeJS?](#what-is-piping-in-nodejs)
+- [15](#15)
+- [What is the purpose of `Buffer` class in NodeJS?](#what-is-the-purpose-of-buffer-class-in-nodejs)
+- [16](#16)
+- [What's the difference between `readFile()` and `createReadStream()` in NodeJS?](#whats-the-difference-between-readfile-and-createreadstream-in-nodejs)
+- [17](#17)
+- [What are basic operational errors in NodeJS?](#what-are-basic-operational-errors-in-nodejs)
+- [18](#18)
+- [What are callbacks? What is the first argument of a callback funciton?](#what-are-callbacks-what-is-the-first-argument-of-a-callback-funciton)
+- [19](#19)
+- [What is callback hell and how can it be fixed?](#what-is-callback-hell-and-how-can-it-be-fixed)
+- [20](#20)
+- [What's the difference between NPM and NodeJS core modules?](#whats-the-difference-between-npm-and-nodejs-core-modules)
+- [21](#21)
+- [What is `package.json` and `package-lock.json`?](#what-is-packagejson-and-package-lockjson)
+- [22](#22)
+- [What are exit codes in NodeJS?](#what-are-exit-codes-in-nodejs)
+- [23](#23)
+- [What's the difference between `setTimeout()` and `setInterval()`?](#whats-the-difference-between-settimeout-and-setinterval)
+- [24](#24)
+- [Explain HTTP](#explain-http)
+- [25](#25)
+- [What are HTTP methods?](#what-are-http-methods)
+- [26](#26)
+- [Caching strategies](#caching-strategies)
+- [27](#27)
+- [JS closures](#js-closures)
+- [28](#28)
+- [JS iterator](#js-iterator)
+- [29](#29)
+- [High order functions](#high-order-functions)
+- [30](#30)
+- [Hoisting](#hoisting)
+- [31](#31)
+- [SQL normalization and denormalization](#sql-normalization-and-denormalization)
+- [32](#32)
+- [SQL injection](#sql-injection)
+- [33](#33)
+- [SQL indexing](#sql-indexing)
+- [35](#35)
+- [SQL Trigger](#sql-trigger)
+- [36](#36)
+- [SQL Distinct and JOIN](#sql-distinct-and-join)
+- [37](#37)
+- [Continuous Integration (CI) and Continuous Delivery (CD)](#continuous-integration-ci-and-continuous-delivery-cd)
+- [39](#39)
+- [What is session?](#what-is-session)
+- [40](#40)
+- [What is sticky session?](#what-is-sticky-session)
+- [41](#41)
+- [What are cookies?](#what-are-cookies)
+- [42](#42)
+- [What is JWT?](#what-is-jwt)
+- [43](#43)
+- [what's the difference between cookie and jwt?](#whats-the-difference-between-cookie-and-jwt)
+- [44](#44)
+- [what is message queue?](#what-is-message-queue)
+- [45](#45)
+- [RabbitMQ](#rabbitmq)
+- [46](#46)
+- [](#)
+- [47](#47)
+- [](#)
+- [48](#48)
+- [](#)
+- [49](#49)
+- [](#)
+- [50](#50)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
 
-### 1. 
+### 1 
+### What is `event-driven` programming?
+
+Event-driven programming is a programming paradigm that focuses on handling and 
+responding to events or changes in a system. It revolves around the concept of 
+events, which represent specific occurrences or states that can trigger actions 
+or behaviors in the program.
+
+1. `Events`: 
+  Events are actions or occurrences that take place within a system. Examples of 
+  events include user interactions (clicking a button, pressing a key), network 
+  events (receiving data, establishing a connection), system events 
+  (timer expiration, file changes), and custom events defined by the application.
+
+2. `Event Handlers`: 
+  Event handlers are functions or code blocks that are associated with specific 
+  events. They define the behavior or actions to be executed when the corresponding 
+  event occurs. Event handlers are registered to listen for events and are triggered 
+  automatically when the event occurs.
+
+3. `Event Loop`: 
+  The event loop is a central component that continuously listens for events and 
+  dispatches them to their corresponding event handlers. It ensures that events 
+  are processed in a sequential and non-blocking manner, allowing the program to 
+  remain responsive and handle multiple events concurrently.
+
+4. `Event Emitters`: 
+  Event emitters are objects that generate events. They provide the mechanism 
+  for triggering events and notifying registered event handlers when an event 
+  occurs. Event emitters are an essential part of event-driven programming 
+  frameworks and libraries.
+
+The `event-driven` programming paradigm is widely used in systems where 
+responsiveness, concurrency, and event-based interactions are crucial. 
+It is particularly prevalent in graphical user interfaces (GUIs), web development, 
+network programming, and real-time applications.
+
+Node.js, for example, is built on an `event-driven` architecture. It utilizes an 
+`event loop` and `event-driven` APIs, allowing developers to build scalable and 
+highly concurrent applications. `Event-driven` programming in Node.js enables 
+efficient handling of I/O operations, such as network requests or file operations, 
+without blocking the execution of other code.
+
+By leveraging `event-driven` programming, developers can create systems that 
+respond to various events and user interactions in a flexible and reactive manner. 
+It promotes loose coupling, modular design, and separation of concerns, as different 
+parts of the application can independently listen for and handle events.
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 2 
 ### What is `libuv`?
 
 `libuv` is a multi-platform C library that provides asynchronous event-driven
@@ -173,7 +224,13 @@ through the Node.js APIs.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-### 2. 
+### 3 
+### What are microtasks and macrotasks?
+
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 4 
 ### What are threads in NodeJS?
 
 In Node.js, the JavaScript code runs in a single-threaded event loop. 
@@ -252,7 +309,7 @@ using `postMessage` and listening for the `'message'` event.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-### 3.
+### 5
 ### What are processes in nodejs?
 
 In Node.js, a process refers to an instance of a computer program that is
@@ -264,10 +321,10 @@ Node.js provides features to create, manage, and interact with processes.
 Here are some key aspects related to processes in Node.js:
 
 1. `Process Object`: 
-    Node.js exposes a global process object that provides information and control over
-    the current Node.js process. It contains properties and methods to access details 
-    such as process ID, command-line arguments, environment variables, exit codes,
-    and more.
+    Node.js exposes a global process object that provides information and control
+    over the current Node.js process. It contains properties and methods to access 
+    details such as process ID, command-line arguments, environment variables, 
+    exit codes and more.
 
 2. `Process Lifecycle`: 
     A Node.js process has a lifecycle that includes different phases, 
@@ -276,10 +333,11 @@ Here are some key aspects related to processes in Node.js:
     It starts when the Node.js application is launched and continues until it is 
     explicitly terminated or encounters an error.
 
-3. `Process Communicatio`n: 
+3. `Process Communication`: 
     Node.js processes can communicate with each other through various mechanisms,  
-    including `inter-process communication `(IPC), such as using the `child_process` module, 
-    message passing, shared memory, or using external systems like databases or message queues.
+    including `inter-process communication `(IPC), such as using the 
+    `child_process` module, message passing, shared memory, or using 
+    external systems like databases or message queues.
 
 4. `Cluster Module`: 
     The Node.js cluster module allows for the creation of `child processes` that 
@@ -296,10 +354,11 @@ Here are some key aspects related to processes in Node.js:
     programs or scripts.
 
 6. `Process Signals`: 
-  Node.js processes can listen for and respond to signals sent by the operating system.
-  Signals, such as `SIGINT` (Ctrl+C), `SIGTERM`, or `SIGUSR1`, can be caught and 
-  handled in Node.js applications to perform specific actions, such as clean 
-  shutdown or restarting the application.
+    Node.js processes can listen for and respond to signals sent by the 
+    operating system. Signals, such as `SIGINT` (Ctrl+C), `SIGTERM`, 
+    or `SIGUSR1`, can be caught and handled in Node.js applications 
+    to perform specific actions, such as clean shutdown or restarting 
+    the application.
 
 Processes in Node.js are fundamental for running and managing applications, 
 allowing for concurrency, scalability, and efficient utilization of system resources. 
@@ -314,13 +373,13 @@ and orchestrate complex workflows involving multiple processes.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-### 4.
+### 6
 ### What is nodejs `child_process`?
 
-In Node.js, the `child_process` module is a built-in module that provides functionality 
-for creating and interacting with child processes. It allows Node.js applications 
-to execute commands or spawn additional processes, enabling communication and 
-interaction with external programs or scripts.
+In Node.js, the `child_process` module is a built-in module that provides
+functionality for creating and interacting with child processes. It allows 
+Node.js applications to execute commands or spawn additional processes, 
+enabling communication and interaction with external programs or scripts.
 
 The `child_process` module provides several methods and features to work with child processes:
 
@@ -344,11 +403,11 @@ The `child_process` module provides several methods and features to work with ch
 4. `child_process.fork()`: 
   This method creates a new Node.js process by forking the current process. 
   It is specifically designed for creating `child processes` that run Node.js 
-  modules. The `child process `created using `fork()` has its own V8 instance and 
-  can communicate with the parent process through `inter-process communication `(IPC).
+  modules. The `child process` created using `fork()` has its own V8 instance and 
+  can communicate with the parent process through `inter-process communication`(IPC).
 
 5. `Inter-Process Communication (IPC)`: 
-  The child_process module supports communication 
+  The `child_process` module supports communication 
   between the parent process and child processes. It allows passing messages, 
   sending data, and establishing event-based communication channels between the 
   parent and child processes.
@@ -391,7 +450,85 @@ executing system commands, and orchestrating concurrent processing tasks.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-### 5.
+### 7
+### Does NodeJS support multi-core computing? How to utilize more than one CPU core?
+
+Node.js supports multi-core computing and provides mechanisms to utilize more 
+than one CPU core for improved performance and scalability. By default, Node.js 
+runs on a single thread, but you can leverage the following techniques to take 
+advantage of multiple CPU cores:
+
+1. `Cluster Module`: 
+  The Cluster module in Node.js allows you to create a cluster of `worker processes` 
+  that share the same server port. Each worker process runs in a separate Node.js 
+  instance and can handle incoming requests. The Cluster module simplifies load 
+  balancing and utilizes multiple CPU cores effectively.
+  ```
+  const cluster = require('cluster');
+  const http = require('http');
+  const numCPUs = require('os').cpus().length;
+
+  if (cluster.isMaster) {
+    console.log(`Master ${process.pid} is running`);
+
+    // Fork worker processes
+    for (let i = 0; i < numCPUs; i++) {
+      cluster.fork();
+    }
+
+    cluster.on('exit', (worker, code, signal) => {
+      console.log(`Worker ${worker.process.pid} died`);
+    });
+  } else {
+    // Worker process: start your server
+    http.createServer((req, res) => {
+      res.writeHead(200);
+      res.end('Hello, World!');
+    }).listen(3000);
+
+    console.log(`Worker ${process.pid} started`);
+  }
+  ```
+  In the example, the master process creates multiple worker processes using 
+  `cluster.fork()`. Each worker process handles incoming `HTTP` requests by 
+  starting its own server. The Cluster module automatically distributes incoming 
+  connections among the `worker processes`, effectively utilizing multiple CPU cores.
+
+2. `Child Processes`: 
+  Node.js provides the `child_process` module, which allows you to spawn additional 
+  child processes that run separate Node.js instances. You can offload CPU-intensive 
+  or blocking tasks to child processes, freeing up the main event loop for other operations.
+  ```
+  const { spawn } = require('child_process');
+
+  const child = spawn('node', ['child.js']);
+
+  child.stdout.on('data', (data) => {
+    console.log(`Child process output: ${data}`);
+  });
+
+  child.on('exit', (code) => {
+    console.log(`Child process exited with code ${code}`);
+  });
+  ```
+  In the example, a child process is spawned using `child_process.spawn()`. 
+  The child process runs a separate Node.js script (child.js), and the parent 
+  process communicates with the child process through standard input/output 
+  streams or message passing.
+
+  These techniques allow you to distribute the workload across multiple CPU cores, 
+  resulting in better utilization of system resources, improved performance, and 
+  increased scalability. However, keep in mind that the optimal approach may depend 
+  on the nature of your application and specific use cases.
+
+  It's worth noting that Node.js also provides libraries and frameworks that abstract 
+  the complexities of multi-core computing, such as the `cluster` module in the core 
+  library or external solutions like `PM2`, which offer additional features for 
+  process management, monitoring, and automatic scaling in multi-core environments.
+
+**[ Back to Top ⬆ ](#table-of-contents)**
+
+### 8
 ### How are errors handled in asynchronous code?
 
 Handling errors in asynchronous code requires careful consideration to ensure 
@@ -474,62 +611,11 @@ and best practices for error handling in asynchronous code:
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-### 6.
+### 9
 ### What is `process.nextTick()` used for?
 
 **[ Back to Top ⬆ ](#table-of-contents)**
-
-### 7. 
-### What is `event-driven` programming?
-
-Event-driven programming is a programming paradigm that focuses on handling and 
-responding to events or changes in a system. It revolves around the concept of 
-events, which represent specific occurrences or states that can trigger actions 
-or behaviors in the program.
-
-1. `Events`: 
-  Events are actions or occurrences that take place within a system. Examples of 
-  events include user interactions (clicking a button, pressing a key), network 
-  events (receiving data, establishing a connection), system events 
-  (timer expiration, file changes), and custom events defined by the application.
-
-2. `Event Handlers`: 
-  Event handlers are functions or code blocks that are associated with specific 
-  events. They define the behavior or actions to be executed when the corresponding 
-  event occurs. Event handlers are registered to listen for events and are triggered 
-  automatically when the event occurs.
-
-3. `Event Loop`: 
-  The event loop is a central component that continuously listens for events and 
-  dispatches them to their corresponding event handlers. It ensures that events 
-  are processed in a sequential and non-blocking manner, allowing the program to 
-  remain responsive and handle multiple events concurrently.
-
-4. `Event Emitters`: 
-  Event emitters are objects that generate events. They provide the mechanism 
-  for triggering events and notifying registered event handlers when an event 
-  occurs. Event emitters are an essential part of event-driven programming 
-  frameworks and libraries.
-
-The `event-driven` programming paradigm is widely used in systems where 
-responsiveness, concurrency, and event-based interactions are crucial. 
-It is particularly prevalent in graphical user interfaces (GUIs), web development, 
-network programming, and real-time applications.
-
-Node.js, for example, is built on an `event-driven` architecture. It utilizes an 
-`event loop` and `event-driven` APIs, allowing developers to build scalable and 
-highly concurrent applications. `Event-driven` programming in Node.js enables 
-efficient handling of I/O operations, such as network requests or file operations, 
-without blocking the execution of other code.
-
-By leveraging `event-driven` programming, developers can create systems that 
-respond to various events and user interactions in a flexible and reactive manner. 
-It promotes loose coupling, modular design, and separation of concerns, as different 
-parts of the application can independently listen for and handle events.
-
-**[ Back to Top ⬆ ](#table-of-contents)**
-
-### 8.
+### 10
 ### What is `EventEmitter` in NodeJS?
 
 In Node.js, the `EventEmitter` class is a built-in class that provides `event-driven` 
@@ -572,10 +658,37 @@ methods to emit events, register event listeners, and manage event subscriptions
   // Emit the 'greet' event
   emitter.emit('greet');
   ```
-In the example above, a new `EventEmitter` instance is created using the `EventEmitter` 
-class. An event listener is registered for the `'greet' event` using the` on()` method. 
+In the example above, a new `EventEmitter` instance is created using the 
+`EventEmitter` class. An event listener is registered for the `'greet' event` 
+using the `on()` method. 
 When the `'greet'` event is emitted using the `emit()` method, the associated event
 listener is executed, resulting in the output `'Hello, world!'`.
+
+Event handlers can also be used to handle built-in events provided by Node.js
+modules, such as the http module for handling HTTP requests or the fs module 
+for handling file system events. In those cases, you typically attach the event 
+handler to the relevant object or instance of a class provided by the module
+```
+const http = require('http');
+
+// Create an HTTP server
+const server = http.createServer();
+
+// Register an event handler for the 'request' event
+server.on('request', (req, res) => {
+  // Handle HTTP request
+  res.end('Hello, World!');
+});
+
+// Start the server
+server.listen(3000, () => {
+  console.log('Server started on port 3000');
+});
+```
+In this example, we create an HTTP server using the `http.createServer()` method.
+We register an event handler for the `'request' event` emitted by the server.
+When a request is received, the `event handler function` is called, allowing us 
+to handle the request and send a response back to the client.
 
 `EventEmitter` is a powerful mechanism in Node.js for building `event-driven` 
 applications, handling asynchronous operations, and enabling communication between 
@@ -584,87 +697,7 @@ development, such as networking, streaming, and handling I/O operations.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-### 9.
-### Does NodeJS support multi-core computing? How to utilize more than one CPU core?
-
-Node.js supports multi-core computing and provides mechanisms to utilize more 
-than one CPU core for improved performance and scalability. By default, Node.js 
-runs on a single thread, but you can leverage the following techniques to take 
-advantage of multiple CPU cores:
-
-1. `Cluster Module`: 
-  The Cluster module in Node.js allows you to create a cluster of `worker processes` 
-  that share the same server port. Each worker process runs in a separate Node.js 
-  instance and can handle incoming requests. The Cluster module simplifies load 
-  balancing and utilizes multiple CPU cores effectively.
-  ```
-  const cluster = require('cluster');
-  const http = require('http');
-  const numCPUs = require('os').cpus().length;
-
-  if (cluster.isMaster) {
-    console.log(`Master ${process.pid} is running`);
-
-    // Fork worker processes
-    for (let i = 0; i < numCPUs; i++) {
-      cluster.fork();
-    }
-
-    cluster.on('exit', (worker, code, signal) => {
-      console.log(`Worker ${worker.process.pid} died`);
-    });
-  } else {
-    // Worker process: start your server
-    http.createServer((req, res) => {
-      res.writeHead(200);
-      res.end('Hello, World!');
-    }).listen(3000);
-
-    console.log(`Worker ${process.pid} started`);
-  }
-  ```
-  In the example, the master process creates multiple worker processes using 
-  `cluster.fork()`. Each worker process handles incoming `HTTP` requests by 
-  starting its own server. The Cluster module automatically distributes incoming 
-  connections among the `worker processes`, effectively utilizing multiple CPU cores.
-
-2. `Child Processes`: 
-  Node.js provides the `child_process` module, which allows you to spawn additional 
-  child processes that run separate Node.js instances. You can offload CPU-intensive 
-  or blocking tasks to child processes, freeing up the main event loop for other operations.
-  ```
-  const { spawn } = require('child_process');
-
-  const child = spawn('node', ['child.js']);
-
-  child.stdout.on('data', (data) => {
-    console.log(`Child process output: ${data}`);
-  });
-
-  child.on('exit', (code) => {
-    console.log(`Child process exited with code ${code}`);
-  });
-  ```
-  In the example, a child process is spawned using `child_process.spawn()`. 
-  The child process runs a separate Node.js script (child.js), and the parent 
-  process communicates with the child process through standard input/output 
-  streams or message passing.
-
-  These techniques allow you to distribute the workload across multiple CPU cores, 
-  resulting in better utilization of system resources, improved performance, and 
-  increased scalability. However, keep in mind that the optimal approach may depend 
-  on the nature of your application and specific use cases.
-
-  It's worth noting that Node.js also provides libraries and frameworks that abstract 
-  the complexities of multi-core computing, such as the `cluster` module in the core 
-  library or external solutions like `PM2`, which offer additional features for 
-  process management, monitoring, and automatic scaling in multi-core environments.
-
-
-
-**[ Back to Top ⬆ ](#table-of-contents)**
-
-### 10.
+### 11
 ### Describe what a stream is in NodeJS.
 
 In Node.js, a stream is an abstract interface that provides a way to read or write 
@@ -726,7 +759,7 @@ in building high-performance and scalable applications.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-### 11.
+### 12
 ### How many types of streams exist in NodeJS?
 
 1. `Readable Streams`: 
@@ -764,7 +797,7 @@ in Node.js.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-### 12.
+### 13
 ### What kind of events can be fired by a stream?
 
 1. `data`: 
@@ -813,7 +846,7 @@ resource management.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-### 13.
+### 14
 ### What is piping in NodeJS?
 
 Piping in Node.js refers to the process of connecting the output of one stream 
@@ -881,7 +914,7 @@ in stream-based processing.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-### 14.
+### 15
 ### What is the purpose of `Buffer` class in NodeJS?
 
 In Node.js, the `Buffer` class is a built-in class that provides a way to handle 
@@ -948,7 +981,7 @@ encryption, and data transformations.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-### 15.
+### 16
 ### What's the difference between `readFile()` and `createReadStream()` in NodeJS?
 
 In Node.js,` readFile()` and `createReadStream()` are both used for reading 
@@ -1019,7 +1052,7 @@ and event-driven manner.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-### 16.
+### 17
 ### What are basic operational errors in NodeJS?
 
 In Node.js, like any other programming language, various operational errors can 
@@ -1073,7 +1106,7 @@ robustness, and error resilience of their Node.js applications.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-### 17.
+### 18
 ### What are callbacks? What is the first argument of a callback funciton?
 
 Callbacks are a fundamental concept in JavaScript and Node.js. They are functions 
@@ -1140,7 +1173,7 @@ function you are working with.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-### 18
+### 19
 ### What is callback hell and how can it be fixed?
 
 `Callback hell`, also known as the `pyramid of doom`, is a situation that occurs 
@@ -1184,8 +1217,9 @@ that can be employed:
   in organizing the code and reducing the level of nesting.
 
 2. `Use Named Functions`: 
-  Instead of using anonymous functions as callbacks, define named functions separately. 
-  This improves code readability and makes it easier to reason about the flow of execution.
+  Instead of using anonymous functions as callbacks, define named functions 
+  separately. This improves code readability and makes it easier to reason 
+  about the flow of execution.
 
 3. `Promises`: 
   Promises provide a more structured and composable way to handle asynchronous operations. 
@@ -1221,7 +1255,7 @@ By utilizing `modularization`, `named functions`, `promises`, and `async/await`,
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-### 19
+### 20
 ### What's the difference between NPM and NodeJS core modules?
 
 `NPM (Node Package Manager)` and Node.js core modules are both integral parts of 
@@ -1278,7 +1312,7 @@ Node.js with additional features and libraries.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-### 20
+### 21
 ### What is `package.json` and `package-lock.json`?
 
 `package.json` and `package-lock.json` are both files used in Node.js projects 
@@ -1320,7 +1354,7 @@ project reproducibility.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-### 21
+### 22
 ### What are exit codes in NodeJS?
 
 In Node.js, `exit codes` are numeric codes that indicate the status of a process 
@@ -1373,7 +1407,7 @@ error handling, process monitoring, and automation workflows.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-### 22
+### 23
 ### What's the difference between `setTimeout()` and `setInterval()`?
 
 Both `setTimeout()` and `setInterval()` are functions in `JavaScript` that allow 
@@ -1416,8 +1450,8 @@ at fixed intervals.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
-### 23
-### Explain HTTP.
+### 24
+### Explain HTTP
 
 `HTTP (Hypertext Transfer Protocol)` is an application-layer protocol that 
 enables communication between clients and servers over the internet. It is the 
@@ -2124,7 +2158,8 @@ of the trigger. It can be one or a combination of these events.
 
 `table_name`: The name of the table on which the trigger is defined.
 
-`FOR EACH ROW`: This clause indicates that the trigger will be executed `for each row` a
+`FOR EACH ROW`: This clause indicates that the trigger will be executed
+`for each row` a
 ffected by the triggering event. It is used when you want the trigger to operate on 
 individual rows.
 
