@@ -3,6 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-console.log('TypeScript Code Index file - additional');
-const _01_design_patterns_creational_1 = __importDefault(require("./01-design-patterns-creational"));
-(0, _01_design_patterns_creational_1.default)();
+const singleton_1 = __importDefault(require("./singleton"));
+console.log('\tCreational design patterns\n');
+function run() {
+    (0, singleton_1.default)();
+}
+exports.default = run;
