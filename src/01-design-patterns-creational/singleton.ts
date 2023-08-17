@@ -1,8 +1,8 @@
 class Singleton {
   private static instance: Singleton;
-  private instanceId: number;
+  private instanceId: number = 0;
   private constructor() {
-    this.instanceId = 1;
+    this.instanceId++;
   }
   public static getInstance(): Singleton {
     if (!Singleton.instance) {

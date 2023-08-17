@@ -2,7 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class Singleton {
     constructor() {
-        this.instanceId = 1;
+        this.instanceId = 0;
+        this.instanceId++;
     }
     static getInstance() {
         if (!Singleton.instance) {
