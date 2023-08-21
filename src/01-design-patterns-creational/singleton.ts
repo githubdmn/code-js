@@ -16,6 +16,7 @@ class Singleton {
 }
 
 function clientCode() {
+  console.log('01 - Singleton');
   const s1 = Singleton.getInstance();
   const s2 = Singleton.getInstance();
 
