@@ -1,10 +1,11 @@
 import runSingleton from './singleton';
+import runPrototype from './prototype';
 
 console.log('\tCreational design patterns\n');
 
 function run() {
-  console.log('01 - Singleton');
-  runSingleton();
+  // runSingleton();
+  runPrototype();
 }
 
 export default run;
