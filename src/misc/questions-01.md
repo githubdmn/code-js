@@ -1,133 +1,134 @@
 # Table of contents
 
-- [1](#1)
-- [What is `event-driven` programming?](#what-is-event-driven-programming)
-- [2](#2)
-- [What is `libuv`?](#what-is-libuv)
-- [3](#3)
-- [What are microtasks and macrotasks?](#what-are-microtasks-and-macrotasks)
-- [4](#4)
-- [What are threads in NodeJS?](#what-are-threads-in-nodejs)
-- [5](#5)
-- [What are processes in nodejs?](#what-are-processes-in-nodejs)
-- [6](#6)
-- [What is nodejs `child_process`?](#what-is-nodejs-child_process)
-- [7](#7)
-- [Does NodeJS support multi-core computing? How to utilize more than one CPU core?](#does-nodejs-support-multi-core-computing-how-to-utilize-more-than-one-cpu-core)
-- [8](#8)
-- [How are errors handled in asynchronous code?](#how-are-errors-handled-in-asynchronous-code)
-- [9](#9)
-- [What is `process.nextTick()` used for?](#what-is-processnexttick-used-for)
-- [10](#10)
-- [What is `EventEmitter` in NodeJS?](#what-is-eventemitter-in-nodejs)
-- [11](#11)
-- [Describe what a stream is in NodeJS.](#describe-what-a-stream-is-in-nodejs)
-- [12](#12)
-- [How many types of streams exist in NodeJS?](#how-many-types-of-streams-exist-in-nodejs)
-- [13](#13)
-- [What kind of events can be fired by a stream?](#what-kind-of-events-can-be-fired-by-a-stream)
-- [14](#14)
-- [What is piping in NodeJS?](#what-is-piping-in-nodejs)
-- [15](#15)
-- [What is the purpose of `Buffer` class in NodeJS?](#what-is-the-purpose-of-buffer-class-in-nodejs)
-- [16](#16)
-- [What's the difference between `readFile()` and `createReadStream()` in NodeJS?](#whats-the-difference-between-readfile-and-createreadstream-in-nodejs)
-- [17](#17)
-- [What are basic operational errors in NodeJS?](#what-are-basic-operational-errors-in-nodejs)
-- [18](#18)
-- [What are callbacks? What is the first argument of a callback funciton?](#what-are-callbacks-what-is-the-first-argument-of-a-callback-funciton)
-- [19](#19)
-- [What is callback hell and how can it be fixed?](#what-is-callback-hell-and-how-can-it-be-fixed)
-- [20](#20)
-- [What's the difference between NPM and NodeJS core modules?](#whats-the-difference-between-npm-and-nodejs-core-modules)
-- [21](#21)
-- [What is `package.json` and `package-lock.json`?](#what-is-packagejson-and-package-lockjson)
-- [22](#22)
-- [What are exit codes in NodeJS?](#what-are-exit-codes-in-nodejs)
-- [23](#23)
-- [What's the difference between `setTimeout()` and `setInterval()`?](#whats-the-difference-between-settimeout-and-setinterval)
-- [24](#24)
-- [Explain HTTP](#explain-http)
-- [25](#25)
-- [What are HTTP methods?](#what-are-http-methods)
-- [26](#26)
-- [Caching strategies](#caching-strategies)
-- [27](#27)
-- [JS closures](#js-closures)
-- [28](#28)
-- [JS iterator](#js-iterator)
-- [29](#29)
-- [High order functions](#high-order-functions)
-- [30](#30)
-- [Hoisting](#hoisting)
-- [31](#31)
-- [SQL normalization and denormalization](#sql-normalization-and-denormalization)
-- [32](#32)
-- [SQL injection](#sql-injection)
-- [33](#33)
-- [SQL indexing](#sql-indexing)
-- [35](#35)
-- [SQL Trigger](#sql-trigger)
-- [36](#36)
-- [SQL Distinct and JOIN](#sql-distinct-and-join)
-- [37](#37)
-- [Continuous Integration (CI) and Continuous Delivery (CD)](#continuous-integration-ci-and-continuous-delivery-cd)
-- [39](#39)
-- [What is session?](#what-is-session)
-- [40](#40)
-- [What is sticky session?](#what-is-sticky-session)
-- [41](#41)
-- [What are cookies?](#what-are-cookies)
-- [42](#42)
-- [What is JWT?](#what-is-jwt)
-- [43](#43)
-- [what's the difference between cookie and jwt?](#whats-the-difference-between-cookie-and-jwt)
-- [44](#44)
-- [what is message queue?](#what-is-message-queue)
-- [45](#45)
-- [RabbitMQ](#rabbitmq)
-- [46](#46)
-- [](#)
-- [47](#47)
-- [](#)
-- [48](#48)
-- [](#)
-- [49](#49)
-- [](#)
-- [50](#50)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
+- [Table of contents](#table-of-contents)
+    - [1](#1)
+    - [What is `event-driven` programming?](#what-is-event-driven-programming)
+    - [2](#2)
+    - [What is `libuv`?](#what-is-libuv)
+    - [3](#3)
+    - [What are microtasks and macrotasks?](#what-are-microtasks-and-macrotasks)
+    - [4](#4)
+    - [What are threads in NodeJS?](#what-are-threads-in-nodejs)
+    - [5](#5)
+    - [What are processes in nodejs?](#what-are-processes-in-nodejs)
+    - [6](#6)
+    - [What is nodejs `child_process`?](#what-is-nodejs-child_process)
+    - [7](#7)
+    - [Does NodeJS support multi-core computing? How to utilize more than one CPU core?](#does-nodejs-support-multi-core-computing-how-to-utilize-more-than-one-cpu-core)
+    - [8](#8)
+    - [How are errors handled in asynchronous code?](#how-are-errors-handled-in-asynchronous-code)
+    - [9](#9)
+    - [What is `process.nextTick()` used for?](#what-is-processnexttick-used-for)
+    - [10](#10)
+    - [What is `EventEmitter` in NodeJS?](#what-is-eventemitter-in-nodejs)
+    - [11](#11)
+    - [Describe what a stream is in NodeJS.](#describe-what-a-stream-is-in-nodejs)
+    - [12](#12)
+    - [How many types of streams exist in NodeJS?](#how-many-types-of-streams-exist-in-nodejs)
+    - [13](#13)
+    - [What kind of events can be fired by a stream?](#what-kind-of-events-can-be-fired-by-a-stream)
+    - [14](#14)
+    - [What is piping in NodeJS?](#what-is-piping-in-nodejs)
+    - [15](#15)
+    - [What is the purpose of `Buffer` class in NodeJS?](#what-is-the-purpose-of-buffer-class-in-nodejs)
+    - [16](#16)
+    - [What's the difference between `readFile()` and `createReadStream()` in NodeJS?](#whats-the-difference-between-readfile-and-createreadstream-in-nodejs)
+    - [17](#17)
+    - [What are basic operational errors in NodeJS?](#what-are-basic-operational-errors-in-nodejs)
+    - [18](#18)
+    - [What are callbacks? What is the first argument of a callback funciton?](#what-are-callbacks-what-is-the-first-argument-of-a-callback-funciton)
+    - [19](#19)
+    - [What is callback hell and how can it be fixed?](#what-is-callback-hell-and-how-can-it-be-fixed)
+    - [20](#20)
+    - [What's the difference between NPM and NodeJS core modules?](#whats-the-difference-between-npm-and-nodejs-core-modules)
+    - [21](#21)
+    - [What is `package.json` and `package-lock.json`?](#what-is-packagejson-and-package-lockjson)
+    - [22](#22)
+    - [What are exit codes in NodeJS?](#what-are-exit-codes-in-nodejs)
+    - [23](#23)
+    - [What's the difference between `setTimeout()` and `setInterval()`?](#whats-the-difference-between-settimeout-and-setinterval)
+    - [24](#24)
+    - [Explain HTTP](#explain-http)
+    - [25](#25)
+    - [What are HTTP methods?](#what-are-http-methods)
+    - [26](#26)
+    - [Caching strategies](#caching-strategies)
+    - [27](#27)
+    - [JS closures](#js-closures)
+    - [28](#28)
+    - [JS iterator](#js-iterator)
+    - [29](#29)
+    - [High order functions](#high-order-functions)
+    - [30](#30)
+    - [Hoisting](#hoisting)
+    - [31](#31)
+    - [SQL normalization and denormalization](#sql-normalization-and-denormalization)
+    - [32](#32)
+    - [SQL injection](#sql-injection)
+    - [33](#33)
+    - [SQL indexing](#sql-indexing)
+    - [35](#35)
+    - [SQL Trigger](#sql-trigger)
+    - [36](#36)
+    - [SQL Distinct and JOIN](#sql-distinct-and-join)
+    - [37](#37)
+    - [Continuous Integration (CI) and Continuous Delivery (CD)](#continuous-integration-ci-and-continuous-delivery-cd)
+    - [39](#39)
+    - [What is session?](#what-is-session)
+    - [40](#40)
+    - [What is sticky session?](#what-is-sticky-session)
+    - [41](#41)
+    - [What are cookies?](#what-are-cookies)
+    - [42](#42)
+    - [What is JWT?](#what-is-jwt)
+    - [43](#43)
+    - [what's the difference between cookie and jwt?](#whats-the-difference-between-cookie-and-jwt)
+    - [44](#44)
+    - [what is message queue?](#what-is-message-queue)
+    - [45](#45)
+    - [RabbitMQ](#rabbitmq)
+    - [46](#46)
+    - [OAuth protocol](#oauth-protocol)
+    - [47](#47)
+    - [](#)
+    - [48](#48)
+    - [](#-1)
+    - [49](#49)
+    - [](#-2)
+    - [50](#50)
+    - [](#-3)
+    - [](#-4)
+    - [](#-5)
+    - [](#-6)
+    - [](#-7)
+    - [](#-8)
+    - [](#-9)
+    - [](#-10)
+    - [](#-11)
+    - [](#-12)
+    - [](#-13)
+    - [](#-14)
+    - [](#-15)
+    - [](#-16)
+    - [](#-17)
+    - [](#-18)
+    - [](#-19)
+    - [](#-20)
+    - [](#-21)
+    - [](#-22)
+    - [](#-23)
+    - [](#-24)
+    - [](#-25)
+    - [](#-26)
+    - [](#-27)
+    - [](#-28)
+    - [](#-29)
+    - [](#-30)
+    - [](#-31)
+    - [](#-32)
+    - [](#-33)
+    - [](#-34)
+    - [](#-35)
 
 ### 1 
 ### What is `event-driven` programming?
@@ -2799,7 +2800,70 @@ distributed applications and systems.
 **[ Back to Top ⬆ ](#table-of-contents)**
 
 ### 46
-###
+### OAuth protocol
+
+OAuth (Open Authorization) is an open standard protocol that enables secure 
+authorization and delegation of access to resources on behalf of a user, without 
+revealing their credentials. It provides a mechanism for users to grant limited 
+access to their protected resources to other applications or services.
+
+OAuth follows a client-server architecture and involves the interaction between 
+three main parties:
+
+ - `Resource Owner`: 
+  The resource owner is the user who owns the protected resources, such as their 
+  personal data or services. They grant access to these resources to a client application.
+
+ - `Client`: 
+  The client is the application or service that wants to access the resource owner's 
+  protected resources. It can be a web or mobile application, server-side application, 
+  or any other type of application that interacts with the resource owner's data.
+
+- `Authorization Server`: 
+  The authorization server is the service responsible for authenticating the resource 
+  owner and issuing access tokens to the client. It verifies the resource owner's 
+  identity, grants authorization, and generates access tokens that the client can 
+  use to access the protected resources.
+
+The OAuth protocol involves a series of steps:
+
+`Registration`: 
+  The client application needs to register itself with the authorization server 
+  and obtain client credentials (client ID and client secret). These credentials 
+  identify the client to the authorization server.
+
+`Authorization Request`: 
+  The client initiates the authorization process by redirecting the resource owner 
+  to the authorization server's endpoint. The request includes the client credentials, 
+  requested scopes (permissions), and a redirect URI.
+
+`User Authentication`: 
+  The resource owner authenticates themselves with the authorization server, 
+  verifying their identity and granting permission to the client to access 
+  their protected resources.
+
+`Authorization Grant`: 
+  Once the resource owner grants permission, the authorization server issues an 
+  authorization grant to the client. The grant can be in the form of an authorization 
+  code, an access token, or other types of credentials.
+
+`Token Request`: 
+  The client exchanges the authorization grant for an access token by sending a 
+  token request to the authorization server. The request includes the grant, 
+  client credentials, and other required parameters.
+
+`Token Response`: 
+  The authorization server validates the request, verifies the grant, and if 
+  successful, issues an access token to the client. The access token represents 
+  the client's authority to access the resource owner's protected resources.
+
+`Accessing Protected Resources`: 
+  The client uses the access token to authenticate and request access to the 
+  resource owner's protected resources. The access token is included in API 
+  requests to the resource server, which validates the token and grants or 
+  denies access accordingly.
+
+OAuth provides a secure and standardized way for clients to obtain limited access to protected resources on behalf of a resource owner, without exposing the resource owner's credentials to the client. It promotes interoperability, flexibility, and enhanced security in distributed systems where multiple applications need to access user data or services.
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
