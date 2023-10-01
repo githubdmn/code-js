@@ -253,14 +253,14 @@ is executed within the event loop.
   typically after all microtasks have been processed. They are used for tasks 
   that may take longer to complete or involve external resources.
 
-  * Execute Synchronous Code: The event loop starts by executing any synchronous 
+ * Execute Synchronous Code: The event loop starts by executing any synchronous 
   code present in the main program.
-  * Process Microtasks: After the synchronous code, the event loop checks for 
+ * Process Microtasks: After the synchronous code, the event loop checks for 
   and processes all pending microtasks. These tasks are executed before any macrotasks.
-  * Execute Macrotasks: Once all microtasks are completed, the event loop moves 
+ * Execute Macrotasks: Once all microtasks are completed, the event loop moves 
   on to execute macrotasks. These tasks are processed one by one in specific 
   phases (e.g., timers, I/O callbacks).
-  * Repeat: The event loop repeats this process continuously, handling new tasks 
+ * Repeat: The event loop repeats this process continuously, handling new tasks 
   as they arrive.
 
 Microtasks are suitable for handling tasks that require immediate attention and 
