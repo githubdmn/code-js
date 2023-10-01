@@ -228,6 +228,45 @@ through the Node.js APIs.
 ### 3 
 ### What are microtasks and macrotasks?
 
+Node.js is a runtime environment that uses an event-driven, non-blocking I/O model.
+It employs an event loop to manage asynchronous operations efficiently. In this 
+context, Node.js distinguishes between two main types of tasks: 
+  microtasks and macrotasks. These terms describe when and how asynchronous code 
+is executed within the event loop.
+
+1. `Microtasks`:
+ * Priority: Microtasks have a higher priority than macrotasks.
+ * Examples: Promises (.then(), .catch(), .finally()), process.nextTick(), and 
+  certain callback functions (e.g., setImmediate(), setTimeout() with a delay of 0)
+  create microtasks.
+ * Execution: Microtasks are executed immediately after the current operation and 
+  before the next macrotask. They are typically used for tasks that need to be 
+  executed as soon as possible, such as handling promise resolutions or deferring 
+  code execution to the next event loop tick.
+
+2. `Macrotasks`:
+  * Priority: Macrotasks have a lower priority than microtasks.
+  * Examples: I/O operations (e.g., reading/writing files, making network requests), 
+  timers (setTimeout(), setInterval()), and most other callback functions are 
+  considered macrotasks.
+  * Execution: Macrotasks are executed in separate phases of the event loop, 
+  typically after all microtasks have been processed. They are used for tasks 
+  that may take longer to complete or involve external resources.
+
+  * Execute Synchronous Code: The event loop starts by executing any synchronous 
+  code present in the main program.
+  * Process Microtasks: After the synchronous code, the event loop checks for 
+  and processes all pending microtasks. These tasks are executed before any macrotasks.
+  * Execute Macrotasks: Once all microtasks are completed, the event loop moves 
+  on to execute macrotasks. These tasks are processed one by one in specific 
+  phases (e.g., timers, I/O callbacks).
+  * Repeat: The event loop repeats this process continuously, handling new tasks 
+  as they arrive.
+
+Microtasks are suitable for handling tasks that require immediate attention and 
+ensuring predictable ordering of asynchronous operations, while macrotasks are 
+used for tasks with lower priority or longer execution times.
+
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 
