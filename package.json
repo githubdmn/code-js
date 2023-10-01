@@ -9,7 +9,6 @@
     "start": "npm run dev",
     "prettier": "npx prettier --config .prettierrc 'src/**/**/*.js' --write",
     "lint": "npx eslint src/"
-  }
   },
   "repository": {
     "type": "git",
