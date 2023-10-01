@@ -253,6 +253,7 @@ is executed within the event loop.
   typically after all microtasks have been processed. They are used for tasks 
   that may take longer to complete or involve external resources.
 
+To better understand the distinction, consider this simplified event loop flow:
  * Execute Synchronous Code: The event loop starts by executing any synchronous 
   code present in the main program.
  * Process Microtasks: After the synchronous code, the event loop checks for 
