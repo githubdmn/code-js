@@ -671,6 +671,25 @@ Recursive Functions: It can be used to break down long-running synchronous opera
 
 Here's an example of how process.nextTick() is used:
 
+```console.log('Start');
+
+process.nextTick(() => {
+  console.log('Callback from nextTick');
+});
+
+console.log('End');```
+
+Output:
+```Start
+End
+Callback from nextTick```
+
+In this example, the callback scheduled with process.nextTick() is executed after the current code block but before any other I/O operations or timers.
+
+However, it's important to use process.nextTick() with caution. Since it runs immediately, it can lead to stack overflows if used excessively within a synchronous loop. It's typically best suited for tasks that need to be executed promptly in a non-blocking manner, but you should avoid excessive use to prevent blocking the event loop and causing performance issues.
+
+For most use cases, you might consider using setImmediate() or Promises to achieve similar results while being more mindful of not causing excessive stack depth or blocking the event loop.
+
 **[ Back to Top ⬆ ](#table-of-contents)**
 ### 10
 ### What is `EventEmitter` in NodeJS?
