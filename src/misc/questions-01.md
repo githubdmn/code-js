@@ -671,18 +671,20 @@ Recursive Functions: It can be used to break down long-running synchronous opera
 
 Here's an example of how process.nextTick() is used:
 
-```console.log('Start');
-
-process.nextTick(() => {
-  console.log('Callback from nextTick');
-});
-
-console.log('End');```
+```
+  console.log('Start');
+  process.nextTick(() => {
+    console.log('Callback from nextTick');
+  });
+  console.log('End');
+```
 
 Output:
-```Start
+```
+Start
 End
-Callback from nextTick```
+Callback from nextTick
+```
 
 In this example, the callback scheduled with process.nextTick() is executed after the current code block but before any other I/O operations or timers.
 
