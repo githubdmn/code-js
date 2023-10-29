@@ -1722,20 +1722,58 @@ and returned the `innerFunction`, the `innerFunction` still retains access to
 
 Closures are commonly used in `JavaScript` for various purposes, such as:
 
-- `Data Privacy`: 
+- `Data Encapsulation`: 
   Closures allow you to create private variables and functions that are not 
   accessible from outside the enclosing function. This helps in encapsulating 
   data and preventing unwanted access or modification.
+  ```
+    function createCounter() {
+      let count = 0;
+      return function() {
+        return ++count;
+      };
+    }
+
+    const counter = createCounter();
+    console.log(counter()); // 1
+    console.log(counter()); // 2
+
+  ```
 
 - `Preserving State`: 
   Closures allow functions to remember and access the values of variables from 
   the time of their creation. This is useful when dealing with asynchronous 
   operations, event handlers, or callback functions that need access to the 
   original context or state.
+  ```
+    function readFileAndProcess(filename, callback) {
+      fs.readFile(filename, 'utf8', (err, data) => {
+        if (err) {
+          callback(err, null);
+        } else {
+          callback(null, data);
+        }
+      });
+    }
+  ```
 
 - `Function Factories`: 
   Closures enable the creation of function factories, where a function generates 
   and returns a new function with predefined behavior based on the captured variables.
+  ```
+    function greeter(greeting) {
+      return function(name) {
+        return `${greeting}, ${name}!`;
+      };
+    }
+
+    const greetHello = greeter("Hello");
+    const greetHi = greeter("Hi");
+
+    console.log(greetHello("Alice")); // Hello, Alice!
+    console.log(greetHi("Bob")); // Hi, Bob!
+
+  ```
 
 Closures are a fundamental concept in JavaScript and play a crucial role in 
 enabling powerful programming techniques like currying, memoization, and module 
