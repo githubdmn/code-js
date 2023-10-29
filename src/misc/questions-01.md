@@ -676,14 +676,14 @@ Here's an example of how process.nextTick() is used:
   process.nextTick(() => {
     console.log('Callback from nextTick');
   });
-  console.log('End');
+  console.log('End');  
 ```
 
 Output:
-```
+``` 
 Start
 End
-Callback from nextTick
+Callback from nextTick  
 ```
 
 In this example, the callback scheduled with process.nextTick() is executed after the current code block but before any other I/O operations or timers.
