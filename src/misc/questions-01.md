@@ -654,6 +654,22 @@ and best practices for error handling in asynchronous code:
 
 ### 9
 ### What is `process.nextTick()` used for?
+In Node.js, process.nextTick() is a special function that allows you to schedule 
+a callback to be executed on the next iteration of the event loop. It is often 
+used for ensuring that a piece of code runs immediately after the current operation 
+but before any I/O operations or other events in the event loop.
+
+Here's what process.nextTick() is typically used for:
+
+Immediate Execution: It guarantees that a function will be executed immediately 
+after the current operation. This can be important for ensuring certain tasks 
+are executed as soon as possible, without waiting for other I/O operations to complete.
+
+Microtask Queue: The callbacks scheduled using process.nextTick() are placed in the microtask queue, which is processed before the regular task queue in the event loop. This makes it ideal for high-priority, non-blocking tasks.
+
+Recursive Functions: It can be used to break down long-running synchronous operations, preventing stack overflows by allowing other operations in the event loop to execute in between recursive calls.
+
+Here's an example of how process.nextTick() is used:
 
 **[ Back to Top ⬆ ](#table-of-contents)**
 ### 10
