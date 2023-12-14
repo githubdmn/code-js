@@ -13,8 +13,9 @@ function armstrong(n: number): boolean {
 }
 
 function run(): void {
-  //console.log(palindrom(993));
-  console.log(armstrong(153));
+  const n = 153;
+  //console.log(`Is the number %{n} palindrom: ${palindrom(n)}`);
+  console.log(`Is the number ${n} armstorng's: ${armstrong(n)}`);
 }
 
 export default run;

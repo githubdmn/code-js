@@ -12,7 +12,8 @@ function armstrong(n) {
     return n === a * a * a + b * b * b + c * c * c;
 }
 function run() {
-    //console.log(palindrom(993));
-    console.log(armstrong(153));
+    const n = 153;
+    //console.log(`Is the number %{n} palindrom: ${palindrom(n)}`);
+    console.log(`Is the number ${n} armstorng's: ${armstrong(n)}`);
 }
 exports.default = run;
