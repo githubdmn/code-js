@@ -28,7 +28,7 @@ function power(n: number, e: number): number {
 
 function calculateNM2(n: number, m: number): number {
   let p = 1;
-  let signum = -1;
+  const signum = -1;
   for (let i = 1; i <= m; i++) {
     p *= n + power(signum, i + 1) * i * m;
     // p *= n + (signum ** (i + 1)) * i * m;
@@ -75,7 +75,6 @@ function run(): void {
   // console.log(calculateNM2(2, 3));
   // console.log(sumFact(6));
   // console.log(perfect(28));
-  firstNPerfect();
 }
 
 export default run;
