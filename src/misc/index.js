@@ -1,7 +1,5 @@
 console.log('\nmisc files\n');
 
-const interview00 = './interview-00';
-const interview01 = './interview-01';
-const interview02 = './interview-02';
+const interview05 = './interview-05';
 
-require(interview00);
+require(interview05);
