@@ -38,6 +38,7 @@ function contains2(n) {
     return false;
 }
 // howMany2
+// switch first and last: 246789 -> 946782
 function firstLast(n) {
     let last = (n % 10) * 10;
     n = Math.floor(n / 10);
