@@ -1,3 +1,47 @@
+/*** 
+
+7. Write a program to calculate:
+
+   a) The sum of positive elements in the array a[1], a[2], ..., a[n].
+   
+   b) The product of non-zero elements in the array a[1], a[2], ..., a[n].
+
+8. Given an array a[1], a[2], ..., a[n], write:
+
+   a) A procedure that changes the sign of all elements with even (odd) indices.
+   
+   b) A function that determines the number of even elements with odd indices in the array.
+   
+   c) A function that determines the number of elements k that precede the first negative element. If all elements are non-negative, k is equal to the number of elements in the array.
+
+9. Write a function that determines the number of sign changes in an array of non-zero elements a[1], a[2], ..., a[n].
+
+10. Write a function that checks if an array a[1], a[2], ..., a[n] has the property that every two consecutive elements are different.
+
+11. Write a function that calculates a[1]*b[n]+a[2]*b[n-1]+... +a[n]*b[1] for given arrays a[1],a[2],...,a[n] and b[1],b[2],...,b[n].
+
+12. Write a program that forms a new array a[1],a[2],...,a[2n] with values b[1],c[1],b[2],c[2],...,b[n],c[n] based on arrays b[1],b[2],...,b[n] and c[1],c[2],...,c[n].
+
+13. Write a procedure that forms a new array b[1],b[2],...,b[n] based on an array a[1],a[2],...,a[2n] using the formula: b[i]=(a[i]+a[2n+1-i])/2
+
+14. Write a procedure to determine the kth element of arrays formed in the following way:
+
+   a[0] and b[0] are given, and
+   
+   a[i] = (a[i-1] + b[i-1]) / 2
+   
+   b[i] = a[k-1] * b[i-1] for i = 1, 2, 3, ...
+
+15. Write a program that forms new arrays b[1],b[2],...,b[n] and c[1],c[2],...,c[n] based on an array a[1],a[2],...,a[2n]. Elements of b and c should be a[1], a[3], ..., a[2n-1] and a[2], a[4], ..., a[2n] respectively.
+
+16. Given an array a[1], a[2], ..., a[2n], write a program to form a new array c[1], c[2], ..., c[2n] with elements rearranged in two ways:
+
+   a) c[1] = a[1], c[n+1] = a[n+1], (c[2], c[n+2], ..., c[n], c[2n]) = (a[2], a[n+2], ..., a[n], a[2n])
+   
+   b) c[2n] = a[2n], c[1] = a[1], c[2n-1] = a[2n-1], ..., c[n+1] = a[n+1], c[n] = a[n] 
+
+*/
+
 function randomArray(length: number, start: number, end: number): number[] {
   const array: number[] = new Array(length);
   for (let i = 0; i < length; i++) {
@@ -22,9 +66,8 @@ function productElements(array: number[]): number {
   return p;
 }
 
-function run(): void {
-  console.log(' Array 07 tasks ');
-
+function runSeven(): void {
+  console.log(' Run 07 ');
   const myArray: number[] = randomArray(7, -10, 30);
   console.log('Array ', myArray);
   const sum = sumPositive(myArray);
@@ -33,49 +76,9 @@ function run(): void {
   console.log(" Product of array's elements ", product);
 }
 
+function run(): void {
+  console.log(' Array 07 tasks ');
+  runSeven();
+}
+
 export default run;
-
-/***
- *
-
-### `push` Method:
-
-The `push` method appends one or more elements to the end of an array 
-and returns the new length of the array after the addition.
-
-**Syntax:**
-```typescript
-array.push(element1, ..., elementN);
-```
-
-- `element1, ..., elementN`: The elements to add to the end of the array.
-
-**Example:**
-```typescript
-let numbers: number[] = [1, 2, 3];
-numbers.push(4, 5);
-console.log(numbers); // Output: [1, 2, 3, 4, 5]
-```
-
-### Benefits:
-
-- **Mutates the Original Array:** Unlike methods that return a new array, 
-  such as `concat` or `slice`, `push` modifies the original array by adding 
-  elements to it directly.
-
-- **Efficient Appending:** `push` is typically efficient for adding elements 
-  to the end of an array, especially when appending one element at a time.
-
-- **Returns New Length:** The method returns the new length of the array after 
-  adding elements, which can be useful for tracking the array's size.
-
-### Notes:
-
-- You can pass one or more elements as arguments to `push`, and they will be 
-  added to the end of the array in the order they are passed.
-
-- The `push` method mutates the original array and modifies its length.
-
-- If you want to add elements to the beginning of an array, you can use the 
-  `unshift` method instead.
-***/
