@@ -42,6 +42,8 @@
 
 */
 
+import { formRandomArray } from './task-formArray';
+
 function randomArray(length: number, start: number, end: number): number[] {
   const array: number[] = new Array(length);
   for (let i = 0; i < length; i++) {
@@ -76,9 +78,15 @@ function runSeven(): void {
   console.log(" Product of array's elements ", product);
 }
 
+function runEight(): void {
+  console.log(' Run 08 ');
+  const array: number[] = formRandomArray(15, -30, 90);
+  console.log(' array: ', array);
+}
+
 function run(): void {
   console.log(' Array 07 tasks ');
-  runSeven();
+  runEight();
 }
 
 export default run;

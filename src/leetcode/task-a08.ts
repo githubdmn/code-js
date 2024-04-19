@@ -1,3 +1,17 @@
+/***
+ * 8. Given an array a[1], a[2], ..., a[n], write:
+
+   a) A procedure that changes the sign of all elements with even (odd) indices.
+   
+   b) A function that determines the number of even elements with odd indices in the array.
+   
+   c) A function that determines the number of elements k that precede the first negative element. If all elements are non-negative, k is equal to the number of elements in the array.
+
+*/
+
+/***
+ *
+
 let fruits: string[] = ['apple', 'banana'];
 
 // 1. push(): Adds one or more elements to the end of an array.
@@ -29,3 +43,5 @@ console.log('Modified fruits array:', fruits);
 console.log('Last fruit removed:', lastFruit);
 console.log('First fruit removed:', firstFruit);
 console.log('Numbers array filled with zeros:', numbers);
+
+*/
