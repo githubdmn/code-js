@@ -7,7 +7,63 @@
    
    c) A function that determines the number of elements k that precede the first negative element. If all elements are non-negative, k is equal to the number of elements in the array.
 
+*
 */
+
+import { formRandomArray } from './task-formArray';
+
+function changeSignA(array: number[]): void {
+  array.forEach((element, index) => {
+    if (index % 2 === 0) array[index] = -element;
+  });
+}
+
+function determineEvenElements(array: number[]): number {
+  let counter = 0;
+  array.forEach((element, index) => {
+    if (index % 2 !== 0 && element % 2 === 0) counter += 1;
+  });
+  return counter;
+}
+
+function elementsReturned(array: number[]): number {
+  let counter = 0;
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] < 0) break;
+    else counter += 1;
+  }
+  return counter;
+}
+
+function elementsReturned2(array: number[]): number {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] < 0) return i;
+  }
+  return array.length;
+}
+
+function elementsReturned3(array: number[]): number {
+  let i = 0;
+  while (array[i] > 0) i += 1;
+  return i;
+}
+
+function run(): void {
+  console.log(' Run 08 ');
+  const array: number[] = formRandomArray(15, -30, 90);
+  console.log(' array: ', array);
+  // changeSignA(array);
+  // console.log(' array: ', array);
+  console.log(
+    'Count even elements odd indencies ',
+    determineEvenElements(array),
+  );
+  console.log('Elements returned: ', elementsReturned(array));
+  console.log('Elements returned: ', elementsReturned2(array));
+  console.log('Elements returned: ', elementsReturned3(array));
+}
+
+export default run;
 
 /***
  *
